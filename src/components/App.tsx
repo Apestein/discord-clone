@@ -1,10 +1,11 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { ReactComponent as QR } from "../assets/qr-code.svg"
+import bgImg from "../assets/bg.svg"
 
 export default function App() {
   return (
-    <div>
+    <Bg>
       <div>
         <div>
           <h3>Welcome back!</h3>
@@ -30,11 +31,14 @@ export default function App() {
           <p>Scan this with the Discord mobile app to log in instantly.</p>
         </div>
       </div>
-    </div>
+    </Bg>
   )
 }
 
-const bg = styled.div``
+const Bg = styled.div`
+  min-height: inherit;
+  background-image: url(${bgImg});
+`
 const StyledQR = styled(QR)`
   max-width: 176px;
   height: fit-content;

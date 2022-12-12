@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./components/App"
 import ErrorPage from "./components/ErrorPage"
+import Channels from "./components/Channels"
 import "./index.css"
 import { createRoot } from "react-dom/client"
 import {
@@ -9,6 +10,7 @@ import {
   RouterProvider,
   Route,
   Link,
+  Outlet,
 } from "react-router-dom"
 
 const router = createBrowserRouter([
@@ -18,8 +20,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "channels/:channelId",
-    element: <div>channels</div>,
+    path: "channels/",
+    element: <Channels />,
+    children: [
+      {
+        path: ":channelId",
+        element: <div>channel inside channels</div>,
+      },
+    ],
   },
 ])
 
