@@ -14,13 +14,13 @@ export default function App() {
             <LabelWrapper>
               <Label>
                 <p>
-                  EMAIL OR PHONE NUMBER<Asterisk>*</Asterisk>
+                  EMAIL OR PHONE NUMBER <Asterisk>*</Asterisk>
                 </p>
                 <Input title="Please fill out this field." />
               </Label>
               <Label>
                 <p>
-                  PASSWORD<Asterisk>*</Asterisk>
+                  PASSWORD <Asterisk>*</Asterisk>
                 </p>
                 <Input title="Please fill out this field." />
               </Label>
@@ -90,6 +90,7 @@ const QRWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: center;
   gap: 10px;
 `
 const Label = styled.label`

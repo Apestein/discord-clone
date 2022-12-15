@@ -1,0 +1,99 @@
+.container {
+  font-family: sans-serif;
+  min-height: inherit;
+  display: flex;
+  color: white;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  width: 72px;
+  gap: 10px;
+  background-color: #202225;
+  align-items: center;
+}
+
+.sidebar2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  width: 240px;
+  background-color: #2f3136;
+}
+
+.mainContent {
+  position: relative;
+  flex: 1 1 auto;
+  background-color: #36393f;
+}
+
+.wumpusWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #8e9297;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.logo {
+  box-sizing: content-box;
+  padding: 12px;
+  border-radius: 50%;
+  background-color: #4f545c;
+  color: #3ba55d;
+}
+
+.channelLogo {
+  width: 48px;
+  border-radius: 50%;
+}
+
+.discordLogo {
+  border-radius: 25%;
+}
+/* prettier-ignore */
+.iconWrapper {
+  display: flex;
+}
+
+.dmWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dmListWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.onlineStatus {
+  width: 12px;
+  height: 12px;
+  background-color: #3ba55d;
+  border: 3px solid #202225;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+}
+
+.userWrapper {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  background-color: #292b2f;
+  width: 100%;
+}
+
+.odinBot {
+  width: 32px;
+  border-radius: 50%;
+}
