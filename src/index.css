@@ -3,6 +3,12 @@
     sans-serif;
   --font-headline: "ABC Ginto Nord", "Noto Sans", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
+  --primary-black: #202225;
+  --secondary-black: #2f3136;
+  --tertiary-black: #36393f;
+  --quaternary-black: #292b2f;
+  --text-primary: #b9bbbe;
+  --text-secondary: #dcddde;
 }
 
 /* prettier-ignore */

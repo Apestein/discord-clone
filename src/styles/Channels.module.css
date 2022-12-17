@@ -11,8 +11,9 @@
   min-height: inherit;
   width: 72px;
   gap: 10px;
-  background-color: #202225;
+  background-color: var(--primary-black);
   align-items: center;
+  padding-top: 10px;
 }
 
 .sidebar2 {
@@ -21,25 +22,38 @@
   flex-direction: column;
   min-height: inherit;
   width: 240px;
-  background-color: #2f3136;
+  background-color: var(--secondary-black);
+  color: var(--text-primary);
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-bottom: 2px solid #00000050;
+}
+
+.sidebarInput {
+  background-color: var(--primary-black);
+  border: none;
+  height: 28px;
+  padding: 5px;
+}
+
+.sidebarInput::placeholder {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+/* prettier-ignore */
+.iconWrapper, .dmListWrapper, .dmWrapper {
+  padding: 10px;
 }
 
 .mainContent {
   position: relative;
   flex: 1 1 auto;
-  background-color: #36393f;
-}
-
-.wumpusWrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #8e9297;
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
+  background-color: var(--tertiary-black);
 }
 
 .logo {
@@ -58,39 +72,57 @@
 .discordLogo {
   border-radius: 25%;
 }
-/* prettier-ignore */
+
 .iconWrapper {
   display: flex;
+  gap: 15px;
 }
 
 .dmWrapper {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  padding-right: 30px;
+  font-size: 12px;
+}
+
+.dmPlus {
+  font-size: 20px;
 }
 
 .dmListWrapper {
   position: relative;
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.statusImageWrapper {
+  position: relative;
 }
 
 .onlineStatus {
   width: 12px;
   height: 12px;
   background-color: #3ba55d;
-  border: 3px solid #202225;
+  border: 3px solid var(--secondary-black);
   border-radius: 50%;
   position: absolute;
-  bottom: 0;
-  left: 8%;
+  bottom: 10%;
+  right: 5%;
 }
 
 .userWrapper {
   position: absolute;
   bottom: 0;
   display: flex;
-  background-color: #292b2f;
+  gap: 5px;
+  background-color: var(--quaternary-black);
   width: 100%;
+}
+
+.userName {
+  color: white;
 }
 
 .odinBot {

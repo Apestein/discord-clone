@@ -12,6 +12,7 @@ import {
   Link,
   Outlet,
 } from "react-router-dom"
+import ChannelIndex from "./components/ChannelIndex"
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
     path: "channels/",
     element: <Channels />,
     children: [
+      { index: true, element: <ChannelIndex /> },
       {
         path: ":channelId",
         element: <div>channel inside channels</div>,
