@@ -22,7 +22,7 @@ export default function App() {
                 <p>
                   PASSWORD <Asterisk>*</Asterisk>
                 </p>
-                <Input title="Please fill out this field." />
+                <Input type="password" title="Please fill out this field." />
               </Label>
             </LabelWrapper>
             <A>Forgot your password?</A>
@@ -72,13 +72,14 @@ const H3 = styled.h3`
 `
 const P = styled.p`
   color: #b9bbbe;
+  font-size: 14px;
 `
 const GreetMsg = styled(P)`
   text-align: center;
 `
 const A = styled.a`
   color: #00aff4;
-  font-size: 12px;
+  font-size: 13px;
 `
 const InputWrapper = styled.div`
   display: flex;
@@ -116,6 +117,8 @@ const Input = styled.input`
   border-radius: 3px;
   border: none;
   background-color: #202225;
+  color: #b9bbbe;
+  font-size: 14px;
 `
 const Button = styled.button`
   width: 100%;

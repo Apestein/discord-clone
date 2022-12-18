@@ -39,6 +39,7 @@
   border: none;
   height: 28px;
   padding: 5px;
+  border-radius: 3px;
 }
 
 .sidebarInput::placeholder {
@@ -54,6 +55,7 @@
   width: 32px;
   height: 2px;
   background-color: var(--text-tertiary);
+  margin-bottom: 10px;
 }
 
 .mainContent {
@@ -83,14 +85,11 @@
   display: flex;
   align-items: center;
   gap: 15px;
-}
-
-.friendsWord {
   padding: 5px;
-  border-radius: 3px;
 }
 
 .friendsWord {
+  border-radius: 3px;
   background-color: var(--text-tertiary);
 }
 
@@ -132,7 +131,9 @@
   position: absolute;
   bottom: 0;
   display: flex;
-  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   background-color: var(--quaternary-black);
   width: 100%;
   padding: 5px;
@@ -140,6 +141,7 @@
 
 .userName {
   color: white;
+  font-size: 14px;
 }
 
 .userId {
