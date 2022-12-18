@@ -18,6 +18,7 @@ export default function Channels() {
     <div className={styles.container}>
       <nav className={styles.sidebar}>
         <DiscordLogo className={styles.discordLogo} />
+        <div className={styles.divider}></div>
         <img className={styles.channelLogo} src={topLogo} alt="TOP" />
         <PlusLogo className={styles.logo} />
         <CompassLogo className={styles.logo} />
@@ -30,7 +31,7 @@ export default function Channels() {
             placeholder="Find or start a conversation"
           />
         </div>
-        <div className={styles.iconWrapper}>
+        <div className={`${styles.iconWrapper} ${styles.friendsWord}`}>
           <FriendsIcon />
           Friends
         </div>
@@ -60,7 +61,7 @@ export default function Channels() {
           </div>
           <div>
             <strong className={styles.userName}>Odin Student</strong>
-            <p>#0000</p>
+            <p className={styles.userId}>#0000</p>
           </div>
           <MicrophoneIcon />
           <HeadphoneIcon />

@@ -12,18 +12,20 @@ export default function ChannelIndex() {
       <nav className={styles.mainNav}>
         <div className={styles.navFriendWrapper}>
           <div className={styles.innerFriendWrapper}>
-            <FriendsIcon /> Friends
+            <FriendsIcon /> <p className={styles.friendWord}>Friends</p>{" "}
           </div>
+          <div className={styles.divider}></div>
           <div className={styles.navStatusWrapper}>
-            <p>Online</p>
+            <p className={styles.onlineWord}>Online</p>
             <p>All</p>
             <p>Pending</p>
             <p>Blocked</p>
-            <p>Add Friend</p>
+            <p className={styles.addFriendWord}>Add Friend</p>
           </div>
         </div>
         <div className={styles.navIconWrapper}>
           <MessageIcon />
+          <div className={styles.divider}></div>
           <InboxIcon />
           <HelpIcon />
         </div>
