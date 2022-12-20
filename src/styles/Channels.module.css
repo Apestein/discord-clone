@@ -1,15 +1,14 @@
 .container {
   font-family: sans-serif;
   min-height: inherit;
-  display: flex;
+  display: grid;
+  grid-template-columns: 72px 240px 1fr;
   color: white;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  min-height: inherit;
-  min-width: 72px;
   gap: 10px;
   background-color: var(--primary-black);
   align-items: center;
@@ -20,8 +19,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: inherit;
-  min-width: 240px;
   background-color: var(--secondary-black);
   color: var(--text-primary);
 }
@@ -60,7 +57,6 @@
 
 .mainContent {
   position: relative;
-  flex: 1 1 auto;
   background-color: var(--tertiary-black);
 }
 

@@ -28,6 +28,6 @@ input, textarea, button, select {
 }
 
 #root {
-  min-height: 100vh;
   font-family: var(--font-primary);
+  min-height: 100vh;
 }
