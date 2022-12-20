@@ -1,135 +1,56 @@
-import React, { useState } from "react"
-import styled from "styled-components"
+import React from "react"
 import { ReactComponent as QR } from "../assets/qr-code.svg"
-import bgImg from "../assets/bg.svg"
 
 export default function App() {
   return (
-    <Bg>
-      <LoginWrapper>
-        <InputWrapper>
-          <H3>Welcome back!</H3>
-          <GreetMsg>We're so excited to see you again!</GreetMsg>
+    <div className="relative min-h-[inherit] bg-discord bg-cover">
+      <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex gap-[32px] p-[32px] w-[784px] bg-[#36393f] text-white rounded-[3px]">
+        <div className="flex flex-col gap-[10px]">
+          <h3 className="text-[24px] text-center">Welcome back!</h3>
+          <p className="text-center">We're so excited to see you again!</p>
           <form>
-            <LabelWrapper>
-              <Label>
+            <div className="flex flex-col gap-[20px]">
+              <label className="flex flex-col items-start g-[5px] text-[12px] text-[#b9bbbe]">
                 <p>
-                  EMAIL OR PHONE NUMBER <Asterisk>*</Asterisk>
+                  EMAIL OR PHONE NUMBER{" "}
+                  <span className="text-[#ed4245]">*</span>
                 </p>
-                <Input title="Please fill out this field." />
-              </Label>
-              <Label>
+                <input
+                  title="Please fill out this field."
+                  className="min-w-[414px] p-[10px] h-[40px] rounded-[3px] border-none bg-[#202225] text-[#b9bbbe] text-[14px]"
+                />
+              </label>
+              <label className="flex flex-col items-start g-[5px] text-[12px] text-[#b9bbbe]">
                 <p>
-                  PASSWORD <Asterisk>*</Asterisk>
+                  PASSWORD <span className="text-[#ed4245]">*</span>
                 </p>
-                <Input type="password" title="Please fill out this field." />
-              </Label>
-            </LabelWrapper>
-            <A>Forgot your password?</A>
+                <input
+                  type="password"
+                  title="Please fill out this field."
+                  className="min-w-[414px] p-[10px] h-[40px] rounded-[3px] border-none bg-[#202225] text-[#b9bbbe] text-[14px]"
+                />
+              </label>
+            </div>
+            <a className="text-[#00aff4] text-[13px] ">Forgot your password?</a>
             <br />
-            <Button>Log In</Button>
-            <P>
-              Need an account? <A>Register</A>
-            </P>
+            <button className="w-full h-[44px] my-[10px] bg-[#5865f2] text-white border-none rounded-[3px] ">
+              Log In
+            </button>
+            <p className="text-[#b9bbbe] text-[14px] ">
+              Need an account?{" "}
+              <a className="text-[#00aff4] text-[13px] ">Register</a>
+            </p>
           </form>
-        </InputWrapper>
-        <QRWrapper>
-          <StyledQR />
+        </div>
+        <div className="flex flex-col items-center text-center justify-center gap-[10px] ">
+          <QR className="max-w-[176px] h-fit " />
           <h3>Log in with QR code</h3>
-          <P>
+          <p className="text-[#b9bbbe] text-[14px]">
             Scan this with the <strong>Discord mobile app</strong> to log in
             instantly.
-          </P>
-        </QRWrapper>
-      </LoginWrapper>
-    </Bg>
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }
-
-const Bg = styled.div`
-  position: relative;
-  min-height: inherit;
-  background-image: url(${bgImg});
-  background-size: cover;
-`
-const LoginWrapper = styled.div`
-  outline: 1px solid black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  gap: 32px;
-  padding: 32px;
-  width: 784px;
-  background-color: #36393f;
-  color: white;
-  border-radius: 3px;
-`
-const H3 = styled.h3`
-  font-size: 24px;
-  text-align: center;
-`
-const P = styled.p`
-  color: #b9bbbe;
-  font-size: 14px;
-`
-const GreetMsg = styled(P)`
-  text-align: center;
-`
-const A = styled.a`
-  color: #00aff4;
-  font-size: 13px;
-`
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`
-const QRWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  gap: 10px;
-`
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 5px;
-  font-size: 12px;
-  color: #b9bbbe;
-`
-const LabelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`
-const Asterisk = styled.span`
-  color: #ed4245;
-`
-const Input = styled.input`
-  min-width: 414px;
-  padding: 10px;
-  height: 40px;
-  border-radius: 3px;
-  border: none;
-  background-color: #202225;
-  color: #b9bbbe;
-  font-size: 14px;
-`
-const Button = styled.button`
-  width: 100%;
-  height: 44px;
-  margin: 10px 0;
-  background-color: #5865f2;
-  color: white;
-  border: none;
-  border-radius: 3px;
-`
-const StyledQR = styled(QR)`
-  max-width: 176px;
-  height: fit-content;
-`
