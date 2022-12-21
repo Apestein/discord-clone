@@ -1,4 +1,5 @@
-import React from "react"
+import { useState } from "react"
+import uniqid from "uniqid"
 import "../styles/ChannelX.scss"
 import { ReactComponent as AtIcon } from "../assets/@.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
@@ -13,8 +14,15 @@ import { ReactComponent as GiftIcon } from "../assets/gift.svg"
 import { ReactComponent as GifIcon } from "../assets/gif.svg"
 import { ReactComponent as StickerIcon } from "../assets/sticker.svg"
 import { ReactComponent as EmojiIcon } from "../assets/emoji.svg"
+import topImg from "../assets/top.webp"
 
 export default function ChannelX() {
+  const msgArray = [
+    { name: "Odin Student", message: "hello world!", time: "Today at 5:00 AM" },
+    { name: "Odin Student2", message: "hello TOP", time: "Today at 5:00 AM" },
+  ]
+  const [messages, setMessages] = useState(msgArray)
+
   return (
     <div className="channelx_container">
       <div className="channelx_header">
@@ -57,6 +65,17 @@ export default function ChannelX() {
             <EmojiIcon />
           </div>
         </div>
+        {msgArray.map((msg) => (
+          <div key={uniqid()} className="channelx_msg-wrapper">
+            <img className="channelx_user-pic" src={topImg} alt="top-img" />
+            <div className="channelx_inner-msg-wrapper">
+              <p>
+                {msg.name} <span className="channelx_time">{msg.time}</span>
+              </p>
+              <p>{msg.message} </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

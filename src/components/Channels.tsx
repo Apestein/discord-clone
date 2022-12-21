@@ -1,4 +1,3 @@
-import React from "react"
 import { Outlet } from "react-router-dom"
 import styles from "../styles/Channels.module.css"
 import { ReactComponent as DiscordLogo } from "../assets/discord-logo.svg"

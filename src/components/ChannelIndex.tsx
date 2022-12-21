@@ -1,4 +1,3 @@
-import React from "react"
 import { ReactComponent as FriendsIcon } from "../assets/friends.svg"
 import { ReactComponent as MessageIcon } from "../assets/message.svg"
 import { ReactComponent as InboxIcon } from "../assets/inbox.svg"

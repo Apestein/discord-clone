@@ -58,6 +58,7 @@
 .mainContent {
   position: relative;
   background-color: var(--tertiary-black);
+  overflow: hidden;
 }
 
 .logo {

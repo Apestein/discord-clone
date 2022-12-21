@@ -1,9 +1,8 @@
-import React from "react"
 import { ReactComponent as QR } from "../assets/qr-code.svg"
 
 export default function App() {
   return (
-    <div className="relative min-h-[inherit] bg-discord bg-cover">
+    <div className="relative min-h-[inherit] bg-discord bg-cover bg-[center_top_95px]">
       <div className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex gap-[32px] p-[32px] w-[784px] bg-[#36393f] text-white rounded-[3px]">
         <div className="flex flex-col gap-[10px]">
           <h3 className="text-[24px] text-center">Welcome back!</h3>

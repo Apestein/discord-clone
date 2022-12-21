@@ -69,6 +69,8 @@
 }
 
 .channelx_msg-container {
+  display: flex;
+  flex-direction: column-reverse;
   position: relative;
   flex: 1 1 auto;
   margin: 0 12px;
@@ -76,8 +78,7 @@
 }
 
 .channelx_input-wrapper {
-  position: absolute;
-  bottom: 0;
+  position: relative;
   width: 100%;
 }
 
@@ -108,4 +109,23 @@
   gap: 12px;
   top: 25%;
   right: 2%;
+}
+
+.channelx_msg-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  color: var(--text-secondary);
+}
+
+.channelx_user-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.channelx_time {
+  font-size: 11px;
+  color: var(--text-primary);
 }
