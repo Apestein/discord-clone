@@ -1,0 +1,89 @@
+<svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 48 48">
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #ffce52;
+            }
+
+            .cls-2 {
+                fill: #ffe369;
+            }
+
+            .cls-3 {
+                fill: #ffb32b;
+            }
+
+            .cls-4 {
+                fill: #f6fafd;
+            }
+
+            .cls-5 {
+                fill: url(#radial-gradient);
+            }
+
+            .cls-6 {
+                fill: url(#radial-gradient-2);
+            }
+
+            .cls-7 {
+                fill: #273941;
+            }
+
+            .cls-8 {
+                fill: #141e21;
+            }
+
+            .cls-9 {
+                fill: #cf4054;
+            }
+
+            .cls-10 {
+                fill: #ae2d4c;
+            }
+        </style>
+        <radialGradient id="radial-gradient" cx="25.285" cy="28.999" r="6"
+            gradientTransform="translate(5.425 -4.783) rotate(-0.156) scale(1.167)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ff568d" />
+            <stop offset="0.454" stop-color="#ff9678" />
+            <stop offset="0.817" stop-color="#ffc26a" />
+            <stop offset="1" stop-color="#ffd364" />
+        </radialGradient>
+        <radialGradient id="radial-gradient-2" cx="3.285" cy="28.999" r="6"
+            gradientTransform="translate(9.092 -4.792) rotate(-0.156) scale(1.167)" xlink:href="#radial-gradient" />
+    </defs>
+    <title>15-kiss love</title>
+    <g id="_15-kiss_love" data-name="15-kiss love">
+        <circle class="cls-1" cx="24" cy="23" r="23" />
+        <path class="cls-2"
+            d="M23.946,3C36.1,2.967,45.969,11.447,46,21.94l.975,0a23,23,0,0,0-45.949.124l.974,0C1.969,11.566,11.8,3.033,23.946,3Z" />
+        <path class="cls-3"
+            d="M46,21.94C46.026,32.434,36.2,40.967,24.049,41S2.026,32.553,2,22.06l-.974,0c-.014.332-.024.665-.023,1a23,23,0,0,0,46-.124c0-.336-.013-.668-.028-1Z" />
+        <ellipse class="cls-4" cx="36.458" cy="7.466" rx="0.825" ry="1.148"
+            transform="translate(5.462 28.061) rotate(-45.175)" />
+        <ellipse class="cls-4" cx="30.192" cy="2.983" rx="0.413" ry="0.574"
+            transform="translate(6.792 22.294) rotate(-45.175)" />
+        <ellipse class="cls-4" cx="33.452" cy="5.474" rx="1.65" ry="2.297"
+            transform="translate(5.988 25.342) rotate(-45.175)" />
+        <circle class="cls-5" cx="35.016" cy="28.97" r="7" />
+        <circle class="cls-6" cx="13.016" cy="29.03" r="7" />
+        <path class="cls-7"
+            d="M24.043,39a3,3,0,0,1-3.008-2.992l2-.005a1,1,0,1,0,1-1,1,1,0,1,1-.006-2,1,1,0,1,0-1-1l-2,.005a3,3,0,1,1,5.24,1.986A3,3,0,0,1,24.043,39Z" />
+        <ellipse class="cls-7" cx="14.989" cy="19.024" rx="3" ry="4"
+            transform="matrix(1, -0.003, 0.003, 1, -0.052, 0.041)" />
+        <ellipse class="cls-8" cx="14.989" cy="19.024" rx="2" ry="3"
+            transform="translate(-0.052 0.041) rotate(-0.156)" />
+        <circle class="cls-4" cx="15.986" cy="18.022" r="1" />
+        <path class="cls-7" d="M39.995,20.957l-2,0a3,3,0,1,0-6,.016l-2,.006a5,5,0,1,1,10-.027Z" />
+        <path class="cls-9"
+            d="M34.245,37.639c-.44-.433-3.029-7.438,1.022-11.47a3.65,3.65,0,0,1,5.34-.089c1.32,1.3,1.3,3.062.389,4.839,1.79-.911,3.57-.94,4.89.359a3.564,3.564,0,0,1-.061,5.287C41.774,40.6,35.125,38.505,34.245,37.639Z" />
+        <path class="cls-10"
+            d="M45.886,31.278c-1.32-1.3-3.1-1.27-4.89-.359.91-1.777.931-3.54-.389-4.839a3.65,3.65,0,0,0-5.34.089c-4.051,4.032-1.462,11.037-1.022,11.47.88.866,7.529,2.958,11.58-1.074A3.564,3.564,0,0,0,45.886,31.278Zm-1.718,3.97c-2.894,2.88-7.644,1.386-8.272.767-.314-.309-2.164-5.313.73-8.193a2.607,2.607,0,0,1,3.814-.063,2.778,2.778,0,0,1,.278,3.456,2.853,2.853,0,0,1,3.493.257A2.546,2.546,0,0,1,44.168,35.248Z" />
+        <ellipse class="cls-4" cx="44.03" cy="33.946" rx="0.825" ry="1.148"
+            transform="translate(-11.085 41.245) rotate(-45.175)" />
+        <ellipse class="cls-4" cx="44.772" cy="32.444" rx="0.413" ry="0.574"
+            transform="translate(-9.801 41.328) rotate(-45.175)" />
+        <path class="cls-3"
+            d="M35.4,38.244a3.69,3.69,0,0,1-1.153-.6,10.933,10.933,0,0,1-1.172-4.374,13.758,13.758,0,0,0,.834,5.69,2.586,2.586,0,0,0,.343.684A8.7,8.7,0,0,0,38.433,40.9a23.191,23.191,0,0,0,2.172-2A12.22,12.22,0,0,1,35.4,38.244Z" />
+    </g>
+</svg>
