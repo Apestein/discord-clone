@@ -1,0 +1,104 @@
+.sidebar2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-black);
+  color: var(--text-primary);
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-bottom: 2px solid #00000050;
+}
+
+.sidebarInput {
+  background-color: var(--primary-black);
+  border: none;
+  height: 28px;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.sidebarInput::placeholder {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+/* prettier-ignore */
+.iconWrapper, .dmListWrapper, .dmWrapper {
+  margin: 10px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 5px;
+}
+
+.friendsWord {
+  border-radius: 3px;
+  background-color: var(--text-tertiary);
+}
+
+.dmWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 30px;
+  font-size: 12px;
+}
+
+.dmPlus {
+  font-size: 20px;
+}
+
+.dmListWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.statusImageWrapper {
+  position: relative;
+}
+
+.onlineStatus {
+  width: 13px;
+  height: 13px;
+  background-color: #3ba55d;
+  border: 2px solid var(--secondary-black);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+}
+
+.userWrapper {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--quaternary-black);
+  width: 100%;
+  padding: 5px;
+}
+
+.userName {
+  color: white;
+  font-size: 14px;
+}
+
+.userId {
+  font-size: 12px;
+}
+
+.odinBot {
+  width: 32px;
+  border-radius: 50%;
+}

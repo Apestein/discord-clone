@@ -15,6 +15,7 @@ import { ReactComponent as GifIcon } from "../assets/gif.svg"
 import { ReactComponent as StickerIcon } from "../assets/sticker.svg"
 import { ReactComponent as EmojiIcon } from "../assets/emoji.svg"
 import topImg from "../assets/top.webp"
+import Sidebar2 from "./Sidebar2"
 
 export default function ChannelX() {
   const msgArray = [
@@ -24,58 +25,64 @@ export default function ChannelX() {
   const [messages, setMessages] = useState(msgArray)
 
   return (
-    <div className="channelx_container">
-      <div className="channelx_header">
-        <div className="channelx_wrapper1">
-          <AtIcon className="channelx_at-icon" />
-          <p className="channelx_p-wrapper1">odin-offtopic</p>
-          <div className="channelx_divider"></div>
-          <p className="channelx_promo">
-            No self promotion, asking for help should go in the proper help
-            channel. off-topic is for relaxing, not asking help questions. Not a
-            meme channel.
-          </p>
-        </div>
-        <ThreadIcon />
-        <BellIcon />
-        <PinIcon />
-        <MembersIcon />
-        <div className="channelx_search-wrapper">
-          <input
-            className="channelx_search-input"
-            type="search"
-            placeholder="Search"
-          />
-          <SearchIcon className="channelx_search-icon" />
-        </div>
-        <InboxIcon />
-        <HelpIcon />
-      </div>
-      <div className="channelx_msg-container">
-        <div className="channelx_input-wrapper">
-          <MsgPlusIcon className="channelx_msgplus-icon" />
-          <input
-            className="channelx_msg-input"
-            placeholder="Type message here"
-          />
-          <div className="channelx_icons-wrapper">
-            <GiftIcon />
-            <GifIcon />
-            <StickerIcon />
-            <EmojiIcon />
+    <div className="channelx_main-content">
+      <Sidebar2 />
+      <div className="channelx_container">
+        <div className="channelx_header">
+          <div className="channelx_wrapper1">
+            <AtIcon className="channelx_at-icon" />
+            <p className="channelx_p-wrapper1">odin-offtopic</p>
+            <div className="channelx_divider"></div>
+            <p className="channelx_promo">
+              No self promotion, asking for help should go in the proper help
+              channel. off-topic is for relaxing, not asking help questions. Not
+              a meme channel.
+            </p>
+          </div>
+          <div className="channelx_wrapper2">
+            <ThreadIcon />
+            <BellIcon />
+            <PinIcon />
+            <MembersIcon />
+            <div className="channelx_search-wrapper">
+              <input
+                className="channelx_search-input"
+                type="search"
+                placeholder="Search"
+              />
+              <SearchIcon className="channelx_search-icon" />
+            </div>
+            <InboxIcon />
+            <HelpIcon />
           </div>
         </div>
-        {msgArray.map((msg) => (
-          <div key={uniqid()} className="channelx_msg-wrapper">
-            <img className="channelx_user-pic" src={topImg} alt="top-img" />
-            <div className="channelx_inner-msg-wrapper">
-              <p>
-                {msg.name} <span className="channelx_time">{msg.time}</span>
-              </p>
-              <p>{msg.message} </p>
+        <div className="channelx_msg-container">
+          <div className="channelx_input-wrapper">
+            <MsgPlusIcon className="channelx_msgplus-icon" />
+            <input
+              className="channelx_msg-input"
+              placeholder="Type message here"
+            />
+            <div className="channelx_icons-wrapper">
+              <GiftIcon />
+              <GifIcon />
+              <StickerIcon />
+              <EmojiIcon />
             </div>
           </div>
-        ))}
+          {msgArray.map((msg) => (
+            <div key={uniqid()} className="channelx_msg-wrapper">
+              <img className="channelx_user-pic" src={topImg} alt="top-img" />
+              <div>
+                <p>
+                  <span className="channelx_username">{msg.name}</span>{" "}
+                  <span className="channelx_time">{msg.time}</span>
+                </p>
+                <p>{msg.message} </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
