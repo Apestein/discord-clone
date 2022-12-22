@@ -7,7 +7,7 @@ import { ReactComponent as HeadphoneIcon } from "../assets/headphone.svg"
 import { ReactComponent as GearIcon } from "../assets/gear.svg"
 import topLogo from "../assets/top.webp"
 
-export default function Sidebar2() {
+export default function IndexSiderbar() {
   return (
     <div className={styles.sidebar2}>
       <div className={styles.inputWrapper}>

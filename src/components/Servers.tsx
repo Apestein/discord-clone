@@ -5,8 +5,9 @@ import { ReactComponent as PlusLogo } from "../assets/plus.svg"
 import { ReactComponent as CompassLogo } from "../assets/compass.svg"
 import { ReactComponent as DownloadLogo } from "../assets/download.svg"
 import topLogo from "../assets/top.webp"
+import { useState } from "react"
 
-export default function Channels() {
+export default function Servers() {
   return (
     <div className={styles.container}>
       <nav className={styles.sidebar}>

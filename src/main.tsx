@@ -10,7 +10,7 @@ import {
 } from "react-router-dom"
 import App from "./components/App"
 import ErrorPage from "./components/ErrorPage"
-import Channels from "./components/Channels"
+import Servers from "./components/Servers"
 import ChannelIndex from "./components/ChannelIndex"
 import ChannelX from "./components/ChannelX"
 
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: "channels/",
-    element: <Channels />,
+    element: <Servers />,
     children: [
       { index: true, element: <ChannelIndex /> },
       {

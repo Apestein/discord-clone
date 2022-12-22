@@ -15,7 +15,7 @@ import { ReactComponent as GifIcon } from "../assets/gif.svg"
 import { ReactComponent as StickerIcon } from "../assets/sticker.svg"
 import { ReactComponent as EmojiIcon } from "../assets/emoji.svg"
 import topImg from "../assets/top.webp"
-import Sidebar2 from "./Sidebar2"
+import ChannelSidebar from "./ChannelSidebar"
 
 export default function ChannelX() {
   const msgArray = [
@@ -23,10 +23,14 @@ export default function ChannelX() {
     { name: "Odin Student2", message: "hello TOP", time: "Today at 5:00 AM" },
   ]
   const [messages, setMessages] = useState(msgArray)
+  const [currentChannel, setCurrentChannel] = useState()
 
   return (
     <div className="channelx_main-content">
-      <Sidebar2 />
+      <ChannelSidebar
+        currentChannel={currentChannel}
+        setCurrentChannel={setCurrentChannel}
+      />
       <div className="channelx_container">
         <div className="channelx_header">
           <div className="channelx_wrapper1">

@@ -7,7 +7,6 @@
 .channelx_container {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .channelx_header {
@@ -81,7 +80,6 @@
 .channelx_msg-container {
   display: flex;
   flex-direction: column-reverse;
-  position: relative;
   flex: 1 1 auto;
   margin: 0 12px;
   margin-bottom: 30px;
@@ -123,7 +121,6 @@
 
 .channelx_msg-wrapper {
   display: flex;
-  align-items: flex-start;
   gap: 12px;
   padding: 12px 0;
   color: var(--text-secondary);

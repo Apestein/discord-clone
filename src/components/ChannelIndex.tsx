@@ -4,12 +4,12 @@ import { ReactComponent as InboxIcon } from "../assets/inbox.svg"
 import { ReactComponent as HelpIcon } from "../assets/help.svg"
 import { ReactComponent as Wumpus } from "../assets/wumpus.svg"
 import styles from "../styles/ChannelIndex.module.css"
-import Sidebar2 from "./Sidebar2"
+import IndexSidebar from "./IndexSidebar"
 
 export default function ChannelIndex() {
   return (
     <div className={styles.mainContent}>
-      <Sidebar2 />
+      <IndexSidebar />
       <div className={styles.messageContainer}>
         <nav className={styles.mainNav}>
           <div className={styles.navFriendWrapper}>
