@@ -23,25 +23,44 @@ export default function ChannelX() {
     { name: "Odin Student2", message: "hello TOP", time: "Today at 5:00 AM" },
   ]
   const [messages, setMessages] = useState(msgArray)
-  const [currentChannel, setCurrentChannel] = useState()
+  const [currentChannel, setCurrentChannel] = useState("odin-general")
+  const currentChannelName =
+    currentChannel === "odin-general" ? "odin-general" : "odin-offtopic"
+  const channelDescription =
+    currentChannel === "odin-general" ? (
+      <>
+        <span>
+          Discussion related to The Odin Project (TOP) or Programming related to
+          TOP |
+        </span>{" "}
+        <a
+          className="text-blue-500 underline"
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        >
+          https://www.dontasktoask.com/
+        </a>{" "}
+        <span>| </span>
+        <a
+          className="text-blue-500 underline"
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        >
+          https://medium.com/@gordon_zhu/how-to-be-great-at-asking-questions-e37be04d0603
+        </a>
+      </>
+    ) : (
+      " No self promotion, asking for help should go in the proper help channel. off-topic is for relaxing, not asking help questions. Not a meme channel."
+    )
 
   return (
     <div className="channelx_main-content">
-      <ChannelSidebar
-        currentChannel={currentChannel}
-        setCurrentChannel={setCurrentChannel}
-      />
+      <ChannelSidebar setCurrentChannel={setCurrentChannel} />
       <div className="channelx_container">
         <div className="channelx_header">
           <div className="channelx_wrapper1">
             <AtIcon className="channelx_at-icon" />
-            <p className="channelx_p-wrapper1">odin-offtopic</p>
+            <p className="channelx_p-wrapper1">{currentChannelName}</p>
             <div className="channelx_divider"></div>
-            <p className="channelx_promo">
-              No self promotion, asking for help should go in the proper help
-              channel. off-topic is for relaxing, not asking help questions. Not
-              a meme channel.
-            </p>
+            <p className="channelx_promo">{channelDescription}</p>
           </div>
           <div className="channelx_wrapper2">
             <ThreadIcon />
