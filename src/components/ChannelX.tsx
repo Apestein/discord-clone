@@ -1,5 +1,4 @@
 import { useState } from "react"
-import uniqid from "uniqid"
 import "../styles/ChannelX.scss"
 import { ReactComponent as AtIcon } from "../assets/@.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
@@ -20,7 +19,11 @@ import ChannelSidebar from "./ChannelSidebar"
 export default function ChannelX() {
   const msgArray = [
     { name: "Odin Student", message: "hello world!", time: "Today at 5:00 AM" },
-    { name: "Odin Student2", message: "hello TOP", time: "Today at 5:00 AM" },
+    {
+      name: "Odin Student2",
+      message: "hello TOP",
+      time: "Today at 5:00 AM",
+    },
   ]
   const [messages, setMessages] = useState(msgArray)
   const [currentChannel, setCurrentChannel] = useState("odin-general")
@@ -94,14 +97,14 @@ export default function ChannelX() {
             </div>
           </div>
           {msgArray.map((msg) => (
-            <div key={uniqid()} className="channelx_msg-wrapper">
+            <div key={crypto.randomUUID()} className="channelx_msg-wrapper">
               <img className="channelx_user-pic" src={topImg} alt="top-img" />
               <div>
                 <p>
                   <span className="channelx_username">{msg.name}</span>{" "}
                   <span className="channelx_time">{msg.time}</span>
                 </p>
-                <p>{msg.message} </p>
+                <p className="channelx_msg">{msg.message} </p>
               </div>
             </div>
           ))}

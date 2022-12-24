@@ -25,24 +25,24 @@ export default function ChannelSidebar({
         <DownIcon className="w-10 scale-50" />
         <p>THE ODIN PROJECT</p>
       </div>
-      <div
-        tabIndex={1}
+      <label
         onClick={() => setCurrentChannel("odin-general")}
-        className="mx-1 mb-1 flex items-center gap-2 rounded-md p-1 text-sm font-semibold focus-within:bg-txtTertiary focus-within:text-white hover:bg-txtTertiary hover:text-white"
+        className="mx-1 mb-1 flex items-center gap-2 rounded-md p-1 text-sm font-semibold hover:bg-txtTertiary hover:text-white"
       >
+        <input className="hidden" type="radio" name="channel" />
         <ThreadIcon />
-        <button>odin-general</button>
+        odin-general
         <InviteIcon className="ml-auto" />
-      </div>
-      <div
-        tabIndex={2}
+      </label>
+      <label
         onClick={() => setCurrentChannel("odin-offtopic")}
-        className="mx-1 mb-1 flex items-center gap-2 rounded-md p-1 text-sm font-semibold focus-within:bg-txtTertiary focus-within:text-white hover:bg-txtTertiary hover:text-white"
+        className="mx-1 mb-1 flex items-center gap-2 rounded-md p-1 text-sm font-semibold hover:bg-txtTertiary hover:text-white"
       >
+        <input className="hidden" type="radio" name="channel" />
         <ThreadIcon />
-        <button>odin-offtopic</button>
+        odin-offtopic
         <InviteIcon className="ml-auto" />
-      </div>
+      </label>
     </div>
   )
 }

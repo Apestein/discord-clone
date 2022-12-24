@@ -31,3 +31,8 @@ input, textarea, button, select {
   font-family: var(--font-primary);
   min-height: 100vh;
 }
+
+label:has(input:checked) {
+  background-color: var(--text-tertiary);
+  color: white;
+}
