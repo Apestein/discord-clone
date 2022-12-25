@@ -1,57 +1,50 @@
-import styles from "../styles/Sidebar2.module.css"
 import { ReactComponent as FriendsIcon } from "../assets/friends.svg"
 import { ReactComponent as SnowIcon } from "../assets/snowgiving.svg"
 import { ReactComponent as NitroIcon } from "../assets/nitro.svg"
-import { ReactComponent as MicrophoneIcon } from "../assets/microphone.svg"
-import { ReactComponent as HeadphoneIcon } from "../assets/headphone.svg"
-import { ReactComponent as GearIcon } from "../assets/gear.svg"
 import topLogo from "../assets/top.webp"
+import UserInfo from "./UserInfo"
 
-export default function IndexSiderbar() {
+export default function IndexSidebar() {
   return (
-    <div className={styles.sidebar2}>
-      <div className={styles.inputWrapper}>
+    <div className="relative flex flex-col bg-bgSecondary text-txtPrimary ">
+      <div className="flex h-12 items-center justify-center border-b-2 border-[#00000050] ">
         <input
-          className={styles.sidebarInput}
+          className="m-2 h-7 w-full rounded-sm border-none bg-bgPrimary p-2 text-sm focus:outline-none "
           placeholder="Find or start a conversation"
         />
       </div>
-      <div className={`${styles.iconWrapper} ${styles.friendsWord}`}>
+      <label className="m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
+        <input
+          className="hidden"
+          type="radio"
+          name="sidebar-nav"
+          defaultChecked
+        />
         <FriendsIcon />
         Friends
-      </div>
-      <div className={styles.iconWrapper}>
+      </label>
+      <label className="m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
+        <input className="hidden" type="radio" name="sidebar-nav" />
         <SnowIcon />
         Snowgiving
-      </div>
-      <div className={styles.iconWrapper}>
+      </label>
+      <label className="m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
+        <input className="hidden" type="radio" name="sidebar-nav" />
         <NitroIcon />
         Nitro
-      </div>
-      <div className={styles.dmWrapper}>
+      </label>
+      <div className="m-2 flex items-center justify-between pr-7 text-xs ">
         <p>DIRECT MESSAGES</p>
-        <p className={styles.dmPlus}>+</p>
+        <p className="text-xl">+</p>
       </div>
-      <div className={styles.dmListWrapper}>
-        <div className={styles.statusImageWrapper}>
-          <img className={styles.odinBot} alt="odin-bot" src={topLogo} />
-          <div className={styles.onlineStatus} />
+      <div className="relative m-2 flex items-center gap-2 ">
+        <div className="relative">
+          <img className="w-8 rounded-full " alt="odin-bot" src={topLogo} />
+          <div className="absolute right-0 bottom-0 h-[13px] w-[13px] rounded-full border-2 border-bgSecondary bg-[#3ba55d] " />
         </div>
         <p>odin-bot</p>
       </div>
-      <div className={styles.userWrapper}>
-        <div className={styles.statusImageWrapper}>
-          <img className={styles.odinBot} alt="odin-bot" src={topLogo} />
-          <div className={styles.onlineStatus} />
-        </div>
-        <div>
-          <strong className={styles.userName}>Odin Student</strong>
-          <p className={styles.userId}>#0000</p>
-        </div>
-        <MicrophoneIcon />
-        <HeadphoneIcon />
-        <GearIcon />
-      </div>
+      <UserInfo />
     </div>
   )
 }

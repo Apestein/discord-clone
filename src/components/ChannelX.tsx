@@ -1,5 +1,4 @@
 import { useState } from "react"
-import "../styles/ChannelX.scss"
 import { ReactComponent as AtIcon } from "../assets/@.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
 import { ReactComponent as BellIcon } from "../assets/bell.svg"
@@ -55,41 +54,43 @@ export default function ChannelX() {
     )
 
   return (
-    <div className="channelx_main-content">
+    <div className="grid grid-cols-[240px_1fr] bg-bgTertiary ">
       <ChannelSidebar setCurrentChannel={setCurrentChannel} />
-      <div className="channelx_container">
-        <div className="channelx_header">
-          <div className="channelx_wrapper1">
-            <AtIcon className="channelx_at-icon" />
-            <p className="channelx_p-wrapper1">{currentChannelName}</p>
-            <div className="channelx_divider"></div>
-            <p className="channelx_promo">{channelDescription}</p>
+      <div className="flex flex-col">
+        <div className="flex h-12 items-center border-b-2 border-[#00000050] p-3 text-txtPrimary">
+          <div className="flex w-0 flex-auto items-center gap-3 overflow-hidden whitespace-nowrap text-sm">
+            <AtIcon className="min-w-fit" />
+            <p className="font-bold text-white">{currentChannelName}</p>
+            <div className="h-6 w-[1px] bg-txtTertiary"></div>
+            <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+              {channelDescription}
+            </p>
           </div>
-          <div className="channelx_wrapper2">
+          <div className="flex gap-3">
             <ThreadIcon />
             <BellIcon />
             <PinIcon />
             <MembersIcon />
-            <div className="channelx_search-wrapper">
+            <div className="relative flex">
               <input
-                className="channelx_search-input"
+                className="h-6 rounded-sm bg-bgPrimary p-1 text-xs focus:outline-none"
                 type="search"
                 placeholder="Search"
               />
-              <SearchIcon className="channelx_search-icon" />
+              <SearchIcon className="absolute right-0 p-1" />
             </div>
             <InboxIcon />
             <HelpIcon />
           </div>
         </div>
-        <div className="channelx_msg-container">
-          <div className="channelx_input-wrapper">
-            <MsgPlusIcon className="channelx_msgplus-icon" />
+        <div className="my-0 mx-3 mb-6 flex flex-auto flex-col-reverse">
+          <div className="relative w-full">
+            <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
             <input
-              className="channelx_msg-input"
+              className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
               placeholder="Type message here"
             />
-            <div className="channelx_icons-wrapper">
+            <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
               <GiftIcon />
               <GifIcon />
               <StickerIcon />
@@ -97,14 +98,25 @@ export default function ChannelX() {
             </div>
           </div>
           {msgArray.map((msg) => (
-            <div key={crypto.randomUUID()} className="channelx_msg-wrapper">
-              <img className="channelx_user-pic" src={topImg} alt="top-img" />
+            <div
+              key={crypto.randomUUID()}
+              className="flex gap-3 py-3 text-txtSecondary"
+            >
+              <img
+                className="h-10 w-10 rounded-full"
+                src={topImg}
+                alt="top-img"
+              />
               <div>
                 <p>
-                  <span className="channelx_username">{msg.name}</span>{" "}
-                  <span className="channelx_time">{msg.time}</span>
+                  <span className="text-sm font-bold text-white">
+                    {msg.name}
+                  </span>{" "}
+                  <span className="text-[11px] text-txtPrimary ">
+                    {msg.time}
+                  </span>
                 </p>
-                <p className="channelx_msg">{msg.message} </p>
+                <p className="break-words">{msg.message} </p>
               </div>
             </div>
           ))}

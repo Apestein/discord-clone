@@ -3,6 +3,7 @@ import { ReactComponent as DownIcon } from "../assets/down.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
 import { ReactComponent as InviteIcon } from "../assets/invite.svg"
 import { ReactComponent as FlowerIcon } from "../assets/flower.svg"
+import UserInfo from "./UserInfo"
 
 export default function ChannelSidebar({
   setCurrentChannel,
@@ -10,7 +11,7 @@ export default function ChannelSidebar({
   setCurrentChannel: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <div className="bg-bgSecondary text-txtPrimary">
+    <div className="relative flex flex-col bg-bgSecondary text-txtPrimary">
       <div className="flex h-[48px] items-center gap-1 border-b-2 border-[#00000050] p-1">
         <div className="relative">
           <FlowerIcon className="absolute scale-75" />
@@ -29,7 +30,7 @@ export default function ChannelSidebar({
         onClick={() => setCurrentChannel("odin-general")}
         className="mx-1 mb-1 flex items-center gap-2 rounded-md p-1 text-sm font-semibold hover:bg-txtTertiary hover:text-white"
       >
-        <input className="hidden" type="radio" name="channel" />
+        <input className="hidden" type="radio" name="channel" defaultChecked />
         <ThreadIcon />
         odin-general
         <InviteIcon className="ml-auto" />
@@ -43,6 +44,7 @@ export default function ChannelSidebar({
         odin-offtopic
         <InviteIcon className="ml-auto" />
       </label>
+      <UserInfo />
     </div>
   )
 }
