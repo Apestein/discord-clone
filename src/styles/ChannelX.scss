@@ -1,7 +1,7 @@
 .channelx_main-content {
-  background-color: var(--tertiary-black);
   display: grid;
   grid-template-columns: 240px 1fr;
+  background-color: var(--tertiary-black);
 }
 
 .channelx_container {
@@ -12,21 +12,21 @@
 .channelx_header {
   display: flex;
   align-items: center;
-  height: 48px;
   border-bottom: 2px solid #00000050;
   padding: 10px;
+  height: 48px;
   color: var(--text-primary);
 }
 
 .channelx_wrapper1 {
   display: flex;
   flex: 1 1 auto;
-  width: 0;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
+  width: 0;
+  overflow: hidden;
   font-size: 14px;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .channelx_wrapper2 {
@@ -39,25 +39,25 @@
 }
 
 .channelx_promo {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .channelx_divider {
+  background-color: var(--text-tertiary);
   width: 1px;
   height: 24px;
-  background-color: var(--text-tertiary);
 }
 
 .channelx_p-wrapper1 {
-  font-weight: bold;
   color: white;
+  font-weight: bold;
 }
 
 .channelx_search-wrapper {
-  position: relative;
   display: flex;
+  position: relative;
 }
 
 .channelx_search-icon {
@@ -67,11 +67,11 @@
 }
 
 .channelx_search-input {
-  background-color: var(--primary-black);
-  font-size: 12px;
   border-radius: 4px;
-  height: 24px;
+  background-color: var(--primary-black);
   padding: 4px;
+  height: 24px;
+  font-size: 12px;
   &:focus {
     outline: none;
   }
@@ -79,8 +79,8 @@
 
 .channelx_msg-container {
   display: flex;
-  flex-direction: column-reverse;
   flex: 1 1 auto;
+  flex-direction: column-reverse;
   margin: 0 12px;
   margin-bottom: 30px;
 }
@@ -91,13 +91,13 @@
 }
 
 .channelx_msg-input {
+  border-radius: 6px;
+  background-color: var(--text-tertiary);
+  padding-left: 40px;
   width: 100%;
   height: 44px;
-  font-size: 14px;
-  padding-left: 40px;
-  border-radius: 6px;
   color: white;
-  background-color: var(--text-tertiary);
+  font-size: 14px;
   &:focus {
     outline: none;
   }
@@ -113,10 +113,10 @@
 .channelx_icons-wrapper {
   display: flex;
   position: absolute;
-  color: var(--text-primary);
-  gap: 12px;
   top: 25%;
   right: 2%;
+  gap: 12px;
+  color: var(--text-primary);
 }
 
 .channelx_msg-wrapper {
@@ -127,20 +127,20 @@
 }
 
 .channelx_user-pic {
+  border-radius: 50%;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
 }
 
 .channelx_time {
-  font-size: 11px;
   color: var(--text-primary);
+  font-size: 11px;
 }
 
 .channelx_username {
-  font-size: 14px;
   color: white;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .channelx_msg {

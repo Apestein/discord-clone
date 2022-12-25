@@ -1,0 +1,60 @@
+.container {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  min-height: inherit;
+  color: white;
+  font-family: sans-serif;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--primary-black);
+  padding-top: 15px;
+}
+
+.discordLogo {
+  border-radius: 25%;
+}
+
+.divider {
+  margin-bottom: 10px;
+  background-color: var(--text-tertiary);
+  width: 32px;
+  height: 2px;
+}
+.channelLogo {
+  border-radius: 50%;
+  width: 48px;
+}
+
+.logo {
+  transition: border-radius 0.1s linear;
+  border-radius: 50%;
+  background-color: #4f545c;
+  padding: 12px;
+  color: #3ba55d;
+  &:hover {
+    border-radius: 12px;
+    background-color: #3ba55d;
+    color: white;
+  }
+}
+
+.sidebarIcon {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+.tooltip {
+  position: absolute;
+  left: 70px;
+  z-index: 1;
+  border-radius: 5px;
+  background-color: var(--primary-black);
+  padding: 5px 15px;
+  width: max-content;
+  color: white;
+}

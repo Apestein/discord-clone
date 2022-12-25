@@ -1,7 +1,7 @@
 .mainContent {
-  background-color: var(--tertiary-black);
   display: grid;
   grid-template-columns: 240px 1fr;
+  background-color: var(--tertiary-black);
 }
 
 .messageContainer {
@@ -11,12 +11,12 @@
 
 .mainNav {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  height: 48px;
+  align-items: center;
   border-bottom: 2px solid #00000050;
-  color: var(--text-primary);
   padding: 10px 20px;
+  height: 48px;
+  color: var(--text-primary);
   font-size: 15px;
 }
 
@@ -34,13 +34,13 @@
 
 .navFriendWrapper {
   display: flex;
+  flex: 1 1 auto;
+  align-items: center;
   align-items: center;
   gap: 15px;
-  white-space: nowrap;
-  overflow: hidden;
-  align-items: center;
-  flex: 1 1 auto;
   width: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .navStatusWrapper {
@@ -50,15 +50,15 @@
 }
 
 .wumpusWrapper {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #8e9297;
-  display: flex;
   flex-direction: column;
   gap: 50px;
+  transform: translate(-50%, -50%);
+  color: #8e9297;
+  text-align: center;
 }
 
 .friendWord {
@@ -66,22 +66,22 @@
 }
 
 .onlineWord {
-  background-color: var(--text-tertiary);
-  color: white;
-  padding: 2px 10px;
   border-radius: 5px;
+  background-color: var(--text-tertiary);
+  padding: 2px 10px;
+  color: white;
 }
 
 .addFriendWord {
-  padding: 2px 10px;
-  background-color: #2d7d46;
-  color: white;
   border-radius: 3px;
+  background-color: #2d7d46;
+  padding: 2px 10px;
   width: max-content;
+  color: white;
 }
 
 .divider {
+  background-color: var(--text-tertiary);
   width: 1px;
   height: 24px;
-  background-color: var(--text-tertiary);
 }

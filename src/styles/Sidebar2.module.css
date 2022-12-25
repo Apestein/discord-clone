@@ -1,6 +1,6 @@
 .sidebar2 {
-  position: relative;
   display: flex;
+  position: relative;
   flex-direction: column;
   background-color: var(--secondary-black);
   color: var(--text-primary);
@@ -8,18 +8,18 @@
 
 .inputWrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 48px;
+  align-items: center;
   border-bottom: 2px solid #00000050;
+  height: 48px;
 }
 
 .sidebarInput {
-  background-color: var(--primary-black);
   border: none;
-  height: 28px;
-  padding: 5px;
   border-radius: 3px;
+  background-color: var(--primary-black);
+  padding: 5px;
+  height: 28px;
 }
 
 .sidebarInput::placeholder {
@@ -45,8 +45,8 @@
 
 .dmWrapper {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding-right: 30px;
   font-size: 12px;
 }
@@ -56,8 +56,8 @@
 }
 
 .dmListWrapper {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
   gap: 10px;
 }
@@ -67,26 +67,26 @@
 }
 
 .onlineStatus {
-  width: 13px;
-  height: 13px;
-  background-color: #3ba55d;
+  position: absolute;
+  right: 0%;
+  bottom: 0%;
   border: 2px solid var(--secondary-black);
   border-radius: 50%;
-  position: absolute;
-  bottom: 0%;
-  right: 0%;
+  background-color: #3ba55d;
+  width: 13px;
+  height: 13px;
 }
 
 .userWrapper {
+  display: flex;
   position: absolute;
   bottom: 0;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   background-color: var(--quaternary-black);
-  width: 100%;
   padding: 5px;
+  width: 100%;
 }
 
 .userName {
@@ -99,6 +99,6 @@
 }
 
 .odinBot {
-  width: 32px;
   border-radius: 50%;
+  width: 32px;
 }
