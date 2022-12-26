@@ -11,7 +11,7 @@ export default function Servers() {
   return (
     <div className="grid min-h-[inherit] grid-cols-[72px_1fr] text-white">
       <nav className="flex flex-col items-center gap-[10px] bg-bgPrimary pt-[15px]">
-        <div
+        <label
           onClick={() => navigate("/channels")}
           className="group relative flex h-12 w-12 cursor-pointer items-center rounded-full transition-all duration-100 ease-linear hover:rounded-xl "
         >
@@ -21,11 +21,11 @@ export default function Servers() {
             className="peer hidden"
             defaultChecked
           />
-          <DiscordLogo className="rounded-full group-hover:rounded-xl peer-checked:rounded-xl" />
+          <DiscordLogo className="rounded-full text-bgTertiary group-hover:rounded-xl peer-checked:rounded-xl peer-checked:text-[#5865F2]" />
           <span className="absolute left-[70px] z-10 w-max scale-0 rounded-md bg-bgPrimary py-1 px-4 text-sm font-bold text-white transition-all duration-100 ease-linear group-hover:scale-100">
             Direct Message
           </span>
-        </div>
+        </label>
         <div className="mb-[10px] h-[2px] w-8 bg-txtTertiary " />
         <ChannelLogo icon={topLogo} text={"The Odin Project"} />
         <ChannelLogo icon={fireshipLogo} text={"Fireship"} />

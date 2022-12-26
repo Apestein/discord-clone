@@ -11,8 +11,8 @@ export default function ChannelFireship() {
         serverName="Fireship"
         channels={["general"]}
       />
-      <div className="flex">
-        <img src={rickRoll} alt="rickroll" />
+      <div>
+        <img className="h-screen" src={rickRoll} alt="rickroll" />
       </div>
     </div>
   )
