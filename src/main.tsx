@@ -1,18 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import "./index.css"
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  Outlet,
-} from "react-router-dom"
+import "./index.scss"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import App from "./components/App"
 import ErrorPage from "./components/ErrorPage"
 import Servers from "./components/Servers"
 import ChannelIndex from "./components/ChannelIndex"
-import ChannelX from "./components/ChannelX"
+import ChannelTOP from "./components/ChannelTOP"
+import ChannelFireship from "./components/ChannelFireship"
 
 const router = createBrowserRouter([
   {
@@ -21,13 +16,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "channels/",
+    path: "channels",
     element: <Servers />,
     children: [
       { index: true, element: <ChannelIndex /> },
       {
-        path: ":channelId",
-        element: <ChannelX />,
+        path: "TheOdinProject",
+        element: <ChannelTOP />,
+      },
+      {
+        path: "Fireship",
+        element: <ChannelFireship />,
       },
     ],
   },

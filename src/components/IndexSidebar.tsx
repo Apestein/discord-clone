@@ -13,7 +13,7 @@ export default function IndexSidebar() {
           placeholder="Find or start a conversation"
         />
       </div>
-      <label className="m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
+      <label className="label-has m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
         <input
           className="hidden"
           type="radio"
@@ -23,12 +23,12 @@ export default function IndexSidebar() {
         <FriendsIcon />
         Friends
       </label>
-      <label className="m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
+      <label className="label-has m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
         <input className="hidden" type="radio" name="sidebar-nav" />
         <SnowIcon />
         Snowgiving
       </label>
-      <label className="m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
+      <label className="label-has m-2 flex items-center gap-4 rounded-sm p-1 hover:bg-txtTertiary hover:text-white">
         <input className="hidden" type="radio" name="sidebar-nav" />
         <NitroIcon />
         Nitro
