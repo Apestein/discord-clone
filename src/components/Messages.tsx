@@ -13,7 +13,6 @@ import { ReactComponent as GifIcon } from "../assets/gif.svg"
 import { ReactComponent as StickerIcon } from "../assets/sticker.svg"
 import { ReactComponent as EmojiIcon } from "../assets/emoji.svg"
 import topImg from "../assets/top.webp"
-import ChannelSidebar from "./ChannelSidebar"
 import {
   getFirestore,
   collection,
@@ -32,16 +31,15 @@ import {
 } from "firebase/firestore"
 import { getAuth } from "firebase/auth"
 
-const db = getFirestore()
-
-export default function ChannelTOP() {
+export default function Messages() {
   type messages = {
     name: string
     message: string
     timestamp: string
   }
   const [messages, setMessages] = useState<messages[]>([])
-  const [currentChannel, setCurrentChannel] = useState("odin-general")
+  const currentChannelName =
+    currentChannel === "odin-general" ? "odin-general" : "odin-offtopic"
   const channelDescription =
     currentChannel === "odin-general" ? (
       <>
@@ -69,6 +67,9 @@ export default function ChannelTOP() {
 
   useEffect(() => {
     const unsub = getMessages()
+    return () => {
+      unsub()
+    }
   }, [])
 
   async function sendMessage(event: any) {
@@ -113,77 +114,68 @@ export default function ChannelTOP() {
   }
 
   return (
-    <div className="grid grid-cols-[240px_1fr] bg-bgTertiary ">
-      <ChannelSidebar
-        setCurrentChannel={setCurrentChannel}
-        serverName="The Odin Project"
-        channels={["odin-general", "odin-offtopic"]}
-      />
-      <div className="flex flex-col">
-        <div className="flex h-12 items-center border-b-2 border-[#00000050] p-3 text-txtPrimary">
-          <div className="flex w-0 flex-auto items-center gap-3 overflow-hidden whitespace-nowrap text-sm">
-            <AtIcon className="min-w-fit" />
-            <p className="font-bold text-white">{currentChannel}</p>
-            <div className="h-6 w-[1px] bg-txtTertiary"></div>
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap">
-              {channelDescription}
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <ThreadIcon />
-            <BellIcon />
-            <PinIcon />
-            <MembersIcon />
-            <div className="relative flex">
-              <input
-                className="h-6 rounded-sm bg-bgPrimary p-1 text-xs focus:outline-none"
-                type="search"
-                placeholder="Search"
-              />
-              <SearchIcon className="absolute right-0 p-1" />
-            </div>
-            <InboxIcon />
-            <HelpIcon />
-          </div>
+    <div className="flex flex-col">
+      <div className="flex h-12 items-center border-b-2 border-[#00000050] p-3 text-txtPrimary">
+        <div className="flex w-0 flex-auto items-center gap-3 overflow-hidden whitespace-nowrap text-sm">
+          <AtIcon className="min-w-fit" />
+          <p className="font-bold text-white">{currentChannelName}</p>
+          <div className="h-6 w-[1px] bg-txtTertiary"></div>
+          <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+            {channelDescription}
+          </p>
         </div>
-        <div className="my-0 mx-3 mb-6 flex flex-auto flex-col-reverse">
-          <form onSubmit={sendMessage} className="relative w-full">
-            <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
+        <div className="flex gap-3">
+          <ThreadIcon />
+          <BellIcon />
+          <PinIcon />
+          <MembersIcon />
+          <div className="relative flex">
             <input
-              className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
-              placeholder="Type message here"
+              className="h-6 rounded-sm bg-bgPrimary p-1 text-xs focus:outline-none"
+              type="search"
+              placeholder="Search"
             />
-            <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
-              <GiftIcon />
-              <GifIcon />
-              <StickerIcon />
-              <EmojiIcon />
-            </div>
-          </form>
-          {messages.map((msg) => (
-            <div
-              key={crypto.randomUUID()}
-              className="flex gap-3 py-3 text-txtSecondary"
-            >
-              <img
-                className="h-10 w-10 rounded-full"
-                src={topImg}
-                alt="top-img"
-              />
-              <div>
-                <p>
-                  <span className="text-sm font-bold text-white">
-                    {msg.name}
-                  </span>{" "}
-                  <span className="text-[11px] text-txtPrimary ">
-                    {msg.timestamp}
-                  </span>
-                </p>
-                <p className="break-words">{msg.message} </p>
-              </div>
-            </div>
-          ))}
+            <SearchIcon className="absolute right-0 p-1" />
+          </div>
+          <InboxIcon />
+          <HelpIcon />
         </div>
+      </div>
+      <div className="my-0 mx-3 mb-6 flex flex-auto flex-col-reverse">
+        <form onSubmit={sendMessage} className="relative w-full">
+          <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
+          <input
+            className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
+            placeholder="Type message here"
+          />
+          <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
+            <GiftIcon />
+            <GifIcon />
+            <StickerIcon />
+            <EmojiIcon />
+          </div>
+        </form>
+        {messages.map((msg) => (
+          <div
+            key={crypto.randomUUID()}
+            className="flex gap-3 py-3 text-txtSecondary"
+          >
+            <img
+              className="h-10 w-10 rounded-full"
+              src={topImg}
+              alt="top-img"
+            />
+            <div>
+              <p>
+                <span className="text-sm font-bold text-white">{msg.name}</span>{" "}
+                <span className="text-[11px] text-txtPrimary ">
+                  {msg.timestamp}
+                </span>
+              </p>
+              <p className="break-words">{msg.message} </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )
