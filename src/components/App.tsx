@@ -17,32 +17,7 @@ const firebaseConfig = {
   appId: "1:634540546992:web:cf53981dbf89899a6cd475",
 }
 const app = initializeApp(firebaseConfig)
-const auth = getAuth()
-signInAnonymously(auth)
-  .then(() => {
-    // Signed in..
-    console.log("sign-in successful")
-  })
-  .catch((error) => {
-    const errorCode = error.code
-    const errorMessage = error.message
-    // ...
-    console.log(errorCode)
-    console.log(errorMessage)
-  })
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid
-    // ...
-    console.log(uid)
-  } else {
-    // User is signed out
-    // ...
-    console.log("user is signed out")
-  }
-})
+const auth = getAuth(app)
 
 export default function App() {
   const navigate = useNavigate()
@@ -50,6 +25,19 @@ export default function App() {
   function login(event: any) {
     event.preventDefault()
     const userName = event.target[0].value
+
+    signInAnonymously(auth)
+      .then(() => {
+        // Signed in..
+        console.log("sign-in successful")
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        // ...
+        console.log(errorCode)
+        console.log(errorMessage)
+      })
     if (auth.currentUser)
       updateProfile(auth.currentUser, {
         displayName: userName,
@@ -65,7 +53,6 @@ export default function App() {
           // ...
           console.log("An error occurred")
         })
-    else console.log("no current user")
     navigate("channels")
   }
   return (

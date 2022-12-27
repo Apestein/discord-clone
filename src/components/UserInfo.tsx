@@ -3,11 +3,11 @@ import { ReactComponent as HeadphoneIcon } from "../assets/headphone.svg"
 import { ReactComponent as GearIcon } from "../assets/gear.svg"
 import topLogo from "../assets/top.webp"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function UserInfo() {
-  const auth = getAuth()
   const [userName, setUserName] = useState("no name")
+  const auth = getAuth()
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid

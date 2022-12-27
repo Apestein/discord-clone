@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, SyntheticEvent } from "react"
 import { ReactComponent as AtIcon } from "../assets/@.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
 import { ReactComponent as BellIcon } from "../assets/bell.svg"
@@ -14,6 +14,16 @@ import { ReactComponent as StickerIcon } from "../assets/sticker.svg"
 import { ReactComponent as EmojiIcon } from "../assets/emoji.svg"
 import topImg from "../assets/top.webp"
 import ChannelSidebar from "./ChannelSidebar"
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  Timestamp,
+  serverTimestamp,
+} from "firebase/firestore/lite"
+
+const db = getFirestore()
 
 export default function ChannelTOP() {
   const msgArray = [
@@ -53,6 +63,29 @@ export default function ChannelTOP() {
       " No self promotion, asking for help should go in the proper help channel. off-topic is for relaxing, not asking help questions. Not a meme channel."
     )
 
+  async function sendMessage(event: any) {
+    try {
+      event.preventDefault()
+      event.target[0].value = ""
+      const docRef = await addDoc(
+        collection(db, "TOP", currentChannel, "message"),
+        {
+          name: "Ada",
+          message: "Lovelace",
+          time: serverTimestamp(),
+        }
+      )
+      console.log("Document written with ID: ", docRef.id)
+    } catch (e) {
+      console.error("Error adding document: ", e)
+    }
+  }
+
+  async function getMessages() {
+    try {
+    } catch (error) {}
+  }
+
   return (
     <div className="grid grid-cols-[240px_1fr] bg-bgTertiary ">
       <ChannelSidebar
@@ -88,7 +121,7 @@ export default function ChannelTOP() {
           </div>
         </div>
         <div className="my-0 mx-3 mb-6 flex flex-auto flex-col-reverse">
-          <div className="relative w-full">
+          <form onSubmit={sendMessage} className="relative w-full">
             <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
             <input
               className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
@@ -100,7 +133,7 @@ export default function ChannelTOP() {
               <StickerIcon />
               <EmojiIcon />
             </div>
-          </div>
+          </form>
           {msgArray.map((msg) => (
             <div
               key={crypto.randomUUID()}
