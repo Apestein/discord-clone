@@ -32,7 +32,7 @@ export default function ChannelSidebar({
       </div>
       {channels.map((channel, index) => (
         <Channel
-          key={index}
+          key={crypto.randomUUID()}
           setCurrentChannel={setCurrentChannel}
           channel={channel}
           index={index}

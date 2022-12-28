@@ -5,9 +5,22 @@ import { ReactComponent as CompassLogo } from "../assets/compass.svg"
 import { ReactComponent as DownloadLogo } from "../assets/download.svg"
 import topLogo from "../assets/top.webp"
 import fireshipLogo from "../assets/fireship.webp"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "./App"
 
 export default function Servers() {
   const navigate = useNavigate()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // ...
+      const uid = user.uid
+      console.log(uid)
+    } else {
+      // User is signed out
+      navigate("/")
+    }
+  })
+
   return (
     <div className="grid min-h-[inherit] grid-cols-[72px_1fr] text-white">
       <nav className="flex flex-col items-center gap-[10px] bg-bgPrimary pt-[15px]">

@@ -32,6 +32,10 @@ input, textarea, button, select {
   font-family: var(--font-primary);
 }
 
+body {
+  overflow: hidden;
+}
+
 .label-has:has(input:checked) {
   background-color: var(--text-tertiary);
   color: white;

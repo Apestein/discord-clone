@@ -12,7 +12,6 @@ import { ReactComponent as GiftIcon } from "../assets/gift.svg"
 import { ReactComponent as GifIcon } from "../assets/gif.svg"
 import { ReactComponent as StickerIcon } from "../assets/sticker.svg"
 import { ReactComponent as EmojiIcon } from "../assets/emoji.svg"
-import topImg from "../assets/top.webp"
 import ChannelSidebar from "./ChannelSidebar"
 import {
   getFirestore,
@@ -121,7 +120,7 @@ export default function ChannelTOP() {
         serverName="The Odin Project"
         channels={["odin-general", "odin-offtopic"]}
       />
-      <div className="flex flex-col">
+      <div className="flex max-h-screen flex-col">
         <div className="flex h-12 items-center border-b-2 border-[#00000050] p-3 text-txtPrimary">
           <div className="flex w-0 flex-auto items-center gap-3 overflow-hidden whitespace-nowrap text-sm">
             <AtIcon className="min-w-fit" />
@@ -148,29 +147,16 @@ export default function ChannelTOP() {
             <HelpIcon />
           </div>
         </div>
-        <div className="my-0 mx-3 mb-6 flex flex-auto flex-col-reverse">
-          <form onSubmit={sendMessage} className="relative w-full">
-            <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
-            <input
-              className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
-              placeholder="Type message here"
-            />
-            <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
-              <GiftIcon />
-              <GifIcon />
-              <StickerIcon />
-              <EmojiIcon />
-            </div>
-          </form>
+        <div className="my-0 mx-3 mb-6 flex flex-auto flex-col-reverse overflow-scroll overflow-x-hidden ">
           {messages.map((msg) => (
             <div
               key={crypto.randomUUID()}
               className="flex gap-3 py-3 text-txtSecondary"
             >
               <img
-                className="h-10 w-10 rounded-full"
-                src={topImg}
-                alt="top-img"
+                className="h-10 w-10 rounded-full object-cover"
+                src={auth.currentUser?.photoURL || "#"}
+                alt="user-img"
               />
               <div>
                 <p>
@@ -185,6 +171,19 @@ export default function ChannelTOP() {
               </div>
             </div>
           ))}
+          <form onSubmit={sendMessage} className="sticky top-0 w-full pr-1">
+            <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
+            <input
+              className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
+              placeholder="Type message here"
+            />
+            <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
+              <GiftIcon />
+              <GifIcon />
+              <StickerIcon />
+              <EmojiIcon />
+            </div>
+          </form>
         </div>
       </div>
     </div>
