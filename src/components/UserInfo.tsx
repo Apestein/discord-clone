@@ -2,20 +2,10 @@ import { ReactComponent as MicrophoneIcon } from "../assets/microphone.svg"
 import { ReactComponent as HeadphoneIcon } from "../assets/headphone.svg"
 import { ReactComponent as GearIcon } from "../assets/gear.svg"
 import topLogo from "../assets/top.webp"
-import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { useState } from "react"
+import { auth } from "./App"
 
 export default function UserInfo() {
-  const [userName, setUserName] = useState("no name")
-  const auth = getAuth()
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid
-      if (user.displayName) setUserName(user.displayName)
-    } else {
-      console.log("no user")
-    }
-  })
+  const userName = auth.currentUser?.displayName
   return (
     <div className="absolute bottom-0 flex w-full items-center justify-center gap-2 bg-bgQuaternary p-1 ">
       <div className="relative">

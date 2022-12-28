@@ -1,12 +1,7 @@
 import { ReactComponent as QR } from "../assets/qr-code.svg"
 import { initializeApp } from "firebase/app"
 import { useNavigate } from "react-router-dom"
-import {
-  getAuth,
-  updateProfile,
-  signInAnonymously,
-  onAuthStateChanged,
-} from "firebase/auth"
+import { getAuth, updateProfile, signInAnonymously } from "firebase/auth"
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8fhWnyenGaaCXi4L6CT_qvRuDxMYOfok",
@@ -18,13 +13,17 @@ const firebaseConfig = {
 }
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
+export { auth }
 
 export default function App() {
   const navigate = useNavigate()
 
-  function login(event: any) {
+  async function login(event: any) {
     event.preventDefault()
-    const userName = event.target[0].value
+    if (!auth.currentUser) {
+      console.log("no user")
+      return
+    }
 
     signInAnonymously(auth)
       .then(() => {
@@ -38,21 +37,19 @@ export default function App() {
         console.log(errorCode)
         console.log(errorMessage)
       })
-    if (auth.currentUser)
-      updateProfile(auth.currentUser, {
-        displayName: userName,
-        photoURL: "https://example.com/jane-q-user/profile.jpg",
+    const userName = event.target[0].value
+    await updateProfile(auth.currentUser, {
+      displayName: userName,
+      photoURL: "https://example.com/jane-q-user/profile.jpg",
+    })
+      .then(() => {
+        // Profile updated!
+        console.log("Profile updated username as " + userName)
       })
-        .then(() => {
-          // Profile updated!
-          // ...
-          console.log("Profile updated")
-        })
-        .catch((error) => {
-          // An error occurred
-          // ...
-          console.log("An error occurred")
-        })
+      .catch((error) => {
+        // An error occurred
+        console.log("An error occurred")
+      })
     navigate("channels")
   }
   return (

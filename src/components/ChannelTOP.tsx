@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ReactComponent as AtIcon } from "../assets/@.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
 import { ReactComponent as BellIcon } from "../assets/bell.svg"
@@ -20,21 +20,15 @@ import {
   addDoc,
   query,
   orderBy,
-  limit,
   onSnapshot,
-  setDoc,
-  updateDoc,
-  doc,
   serverTimestamp,
-  getDocs,
-  deleteDoc,
-  getDoc,
 } from "firebase/firestore"
-import { getAuth } from "firebase/auth"
-
-const db = getFirestore()
+import { auth } from "./App"
+import { Unsubscribe } from "firebase/auth"
 
 export default function ChannelTOP() {
+  const db = getFirestore()
+
   type messages = {
     name: string
     message: string
@@ -42,6 +36,7 @@ export default function ChannelTOP() {
   }
   const [messages, setMessages] = useState<messages[]>([])
   const [currentChannel, setCurrentChannel] = useState("odin-general")
+  const userName = auth.currentUser?.displayName
   const channelDescription =
     currentChannel === "odin-general" ? (
       <>
@@ -67,9 +62,16 @@ export default function ChannelTOP() {
       " No self promotion, asking for help should go in the proper help channel. off-topic is for relaxing, not asking help questions. Not a meme channel."
     )
 
+  const unsubRef = useRef<Unsubscribe>()
   useEffect(() => {
     const unsub = getMessages()
+    unsubRef.current = unsub
   }, [])
+
+  useEffect(() => {
+    if (unsubRef.current) unsubRef.current()
+    getMessages()
+  }, [currentChannel])
 
   async function sendMessage(event: any) {
     try {
@@ -77,7 +79,7 @@ export default function ChannelTOP() {
       const docRef = await addDoc(
         collection(db, "TOP", currentChannel, "messages"),
         {
-          name: getAuth().currentUser?.displayName,
+          name: userName,
           message: event.target[0].value,
           timestamp: serverTimestamp(),
         }
