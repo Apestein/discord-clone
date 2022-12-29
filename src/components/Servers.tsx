@@ -13,8 +13,7 @@ export default function Servers() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // ...
-      const uid = user.uid
-      console.log(uid)
+      console.log("Signed in as: " + user.displayName)
     } else {
       // User is signed out
       navigate("/")

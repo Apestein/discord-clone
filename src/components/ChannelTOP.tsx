@@ -22,9 +22,10 @@ import {
   onSnapshot,
   serverTimestamp,
   limit,
+  getCountFromServer,
 } from "firebase/firestore"
 import { auth } from "./App"
-import { Unsubscribe } from "firebase/auth"
+import InfiniteScroll from "react-infinite-scroll-component"
 
 export default function ChannelTOP() {
   const db = getFirestore()
@@ -35,6 +36,7 @@ export default function ChannelTOP() {
     timestamp: string
   }
   const [messages, setMessages] = useState<messages[]>([])
+  const [msgCollectionSize, setMsgCollectionSize] = useState(0)
   const [currentChannel, setCurrentChannel] = useState("odin-general")
   const userName = auth.currentUser?.displayName
   const channelDescription =
@@ -62,17 +64,18 @@ export default function ChannelTOP() {
       " No self promotion, asking for help should go in the proper help channel. off-topic is for relaxing, not asking help questions. Not a meme channel."
     )
 
-  let unsubRef = useRef<Unsubscribe>()
   useEffect(() => {
     const unsub = getMessages()
-    unsubRef.current = unsub
-  }, [])
+    console.log("subbed")
+    return () => {
+      unsub()
+      console.log("unsubbed")
+    }
+  }, [currentChannel])
 
   useEffect(() => {
-    if (unsubRef.current) unsubRef.current()
-
-    unsubRef.current = getMessages()
-  }, [currentChannel])
+    getCollectionSize()
+  }, [messages])
 
   async function sendMessage(event: any) {
     try {
@@ -92,11 +95,17 @@ export default function ChannelTOP() {
     }
   }
 
+  async function getCollectionSize() {
+    const countQuery = collection(db, "TOP", currentChannel, "messages")
+    const countSnapshot = await getCountFromServer(countQuery)
+    setMsgCollectionSize(countSnapshot.data().count)
+  }
+
   function getMessages() {
     const msgQuery = query(
       collection(db, "TOP", currentChannel, "messages"),
       orderBy("timestamp", "desc"),
-      limit(250)
+      limit(messages.length + 5)
     )
     const unsub = onSnapshot(msgQuery, (snapshot) => {
       const dbMessages: any = []
@@ -126,7 +135,7 @@ export default function ChannelTOP() {
       />
       <div className="flex max-h-screen flex-col">
         <div className="flex h-12 items-center border-b-2 border-[#00000050] p-3 text-txtPrimary">
-          <div className="flex w-0 flex-auto items-center gap-3 overflow-hidden whitespace-nowrap text-sm">
+          <div className="flex w-0 flex-auto items-center gap-2 overflow-hidden whitespace-nowrap text-sm">
             <AtIcon className="min-w-fit" />
             <p className="font-bold text-white">{currentChannel}</p>
             <div className="h-6 w-[1px] bg-txtTertiary"></div>
@@ -151,30 +160,48 @@ export default function ChannelTOP() {
             <HelpIcon />
           </div>
         </div>
-        <div className="ml-3 flex flex-auto flex-col-reverse overflow-scroll overflow-x-hidden ">
-          {messages.map((msg) => (
-            <div
-              key={crypto.randomUUID()}
-              className="flex gap-3 py-3 text-txtSecondary"
-            >
-              <img
-                className="h-12 w-12 rounded-full bg-black object-cover"
-                src={auth.currentUser?.photoURL || "#"}
-                alt="user-img"
-              />
-              <div>
-                <p>
-                  <span className="text-sm font-bold text-white">
-                    {msg.name}
-                  </span>{" "}
-                  <span className="text-[11px] text-txtPrimary ">
-                    {msg.timestamp}
-                  </span>
-                </p>
-                <p className="break-words">{msg.message} </p>
+        <div
+          id="scrollableDiv"
+          className="ml-3 flex flex-auto flex-col-reverse overflow-auto"
+        >
+          <InfiniteScroll
+            className="flex flex-col-reverse"
+            dataLength={messages.length}
+            next={() => setTimeout(getMessages, 1000)}
+            hasMore={messages.length >= msgCollectionSize ? false : true}
+            loader={<h4>Loading...</h4>}
+            inverse={true}
+            scrollableTarget="scrollableDiv"
+            endMessage={
+              <p className="text-center text-txtPrimary">
+                <b>You have reached the end of this channel...</b>
+              </p>
+            }
+          >
+            {messages.map((msg) => (
+              <div
+                key={crypto.randomUUID()}
+                className="flex h-[25vh] gap-3 py-3 text-txtSecondary"
+              >
+                <img
+                  className="h-12 w-12 rounded-full bg-black "
+                  src={auth.currentUser?.photoURL || "#"}
+                  alt="user-img"
+                />
+                <div>
+                  <p>
+                    <span className="text-sm font-bold text-white">
+                      {msg.name}
+                    </span>{" "}
+                    <span className="text-[11px] text-txtPrimary ">
+                      {msg.timestamp}
+                    </span>
+                  </p>
+                  <p className="break-words">{msg.message} </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </InfiniteScroll>
         </div>
         <form onSubmit={sendMessage} className="sticky top-0 mx-3">
           <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />

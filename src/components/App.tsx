@@ -40,12 +40,11 @@ export default function App() {
       })
         .then(() => {
           // Profile updated!
-          console.log("Profile updated username as " + userName)
-          console.log(auth.currentUser?.photoURL)
+          console.log("Profile updated username")
         })
         .catch((error) => {
           // An error occurred
-          console.log("An error occurred")
+          console.error("An error occurred", error)
         })
     navigate("channels")
   }
