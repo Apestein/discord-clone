@@ -6,10 +6,12 @@ import { ReactComponent as FlowerIcon } from "../assets/flower.svg"
 import UserInfo from "./UserInfo"
 
 export default function ChannelSidebar({
+  currentChannel,
   setCurrentChannel,
   serverName,
   channels,
 }: {
+  currentChannel: string
   setCurrentChannel: React.Dispatch<React.SetStateAction<string>>
   serverName: string
   channels: string[]
@@ -30,12 +32,12 @@ export default function ChannelSidebar({
         <DownIcon className="w-10 scale-50" />
         <p>{serverName.toUpperCase()}</p>
       </div>
-      {channels.map((channel, index) => (
+      {channels.map((channel) => (
         <Channel
           key={crypto.randomUUID()}
+          currentChannel={currentChannel}
           setCurrentChannel={setCurrentChannel}
           channel={channel}
-          index={index}
         />
       ))}
       <UserInfo />
@@ -43,17 +45,18 @@ export default function ChannelSidebar({
   )
 }
 //helper function (creates components)
-function Channel({ setCurrentChannel, channel, index }: any) {
+function Channel({ currentChannel, setCurrentChannel, channel }: any) {
   return (
     <label
-      onClick={() => setCurrentChannel(channel)}
       className="label-has mx-1 mb-1 flex items-center gap-2 rounded-md p-1 text-sm font-semibold hover:bg-txtTertiary hover:text-white"
+      onClick={() => setCurrentChannel(channel)}
     >
-      {index === 0 ? (
-        <input className="hidden" type="radio" name="channel" defaultChecked />
-      ) : (
-        <input className="hidden" type="radio" name="channel" />
-      )}
+      <input
+        className="hidden"
+        type="radio"
+        name="channel"
+        defaultChecked={currentChannel === channel ? true : false}
+      />
       <ThreadIcon />
       {channel}
       <InviteIcon className="ml-auto" />

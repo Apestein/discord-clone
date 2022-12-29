@@ -36,7 +36,7 @@ export default function App() {
     if (auth.currentUser)
       await updateProfile(auth.currentUser, {
         displayName: userName,
-        photoURL: await fetchDogImg(),
+        photoURL: "https://avatars.dicebear.com/api/adventurer/:seed.svg",
       })
         .then(() => {
           // Profile updated!
@@ -48,12 +48,6 @@ export default function App() {
           console.log("An error occurred")
         })
     navigate("channels")
-  }
-
-  async function fetchDogImg() {
-    const response = await fetch("https://dog.ceo/api/breeds/image/random")
-    const data = await response.json()
-    return data.message
   }
 
   return (

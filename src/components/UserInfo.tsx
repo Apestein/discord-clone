@@ -9,7 +9,7 @@ export default function UserInfo() {
     <div className="absolute bottom-0 flex w-full items-center justify-center gap-2 bg-bgQuaternary p-1 ">
       <div className="relative">
         <img
-          className="h-8 w-8 rounded-full object-cover"
+          className="h-10 w-10 rounded-full bg-black object-cover"
           alt="user-img"
           src={auth.currentUser?.photoURL || "#"}
         />

@@ -36,6 +36,16 @@ body {
   overflow: hidden;
 }
 
+::-webkit-scrollbar {
+  border-radius: 6px;
+  background-color: #00000050;
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: black;
+}
+
 .label-has:has(input:checked) {
   background-color: var(--text-tertiary);
   color: white;

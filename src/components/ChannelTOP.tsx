@@ -21,6 +21,7 @@ import {
   orderBy,
   onSnapshot,
   serverTimestamp,
+  limit,
 } from "firebase/firestore"
 import { auth } from "./App"
 import { Unsubscribe } from "firebase/auth"
@@ -61,7 +62,7 @@ export default function ChannelTOP() {
       " No self promotion, asking for help should go in the proper help channel. off-topic is for relaxing, not asking help questions. Not a meme channel."
     )
 
-  const unsubRef = useRef<Unsubscribe>()
+  let unsubRef = useRef<Unsubscribe>()
   useEffect(() => {
     const unsub = getMessages()
     unsubRef.current = unsub
@@ -69,7 +70,8 @@ export default function ChannelTOP() {
 
   useEffect(() => {
     if (unsubRef.current) unsubRef.current()
-    getMessages()
+
+    unsubRef.current = getMessages()
   }, [currentChannel])
 
   async function sendMessage(event: any) {
@@ -93,7 +95,8 @@ export default function ChannelTOP() {
   function getMessages() {
     const msgQuery = query(
       collection(db, "TOP", currentChannel, "messages"),
-      orderBy("timestamp", "desc")
+      orderBy("timestamp", "desc"),
+      limit(250)
     )
     const unsub = onSnapshot(msgQuery, (snapshot) => {
       const dbMessages: any = []
@@ -116,6 +119,7 @@ export default function ChannelTOP() {
   return (
     <div className="grid grid-cols-[240px_1fr] bg-bgTertiary ">
       <ChannelSidebar
+        currentChannel={currentChannel}
         setCurrentChannel={setCurrentChannel}
         serverName="The Odin Project"
         channels={["odin-general", "odin-offtopic"]}
@@ -147,14 +151,14 @@ export default function ChannelTOP() {
             <HelpIcon />
           </div>
         </div>
-        <div className="my-0 mx-3 mb-6 flex flex-auto flex-col-reverse overflow-scroll overflow-x-hidden ">
+        <div className="ml-3 flex flex-auto flex-col-reverse overflow-scroll overflow-x-hidden ">
           {messages.map((msg) => (
             <div
               key={crypto.randomUUID()}
               className="flex gap-3 py-3 text-txtSecondary"
             >
               <img
-                className="h-10 w-10 rounded-full object-cover"
+                className="h-12 w-12 rounded-full bg-black object-cover"
                 src={auth.currentUser?.photoURL || "#"}
                 alt="user-img"
               />
@@ -171,20 +175,20 @@ export default function ChannelTOP() {
               </div>
             </div>
           ))}
-          <form onSubmit={sendMessage} className="sticky top-0 w-full pr-1">
-            <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
-            <input
-              className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
-              placeholder="Type message here"
-            />
-            <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
-              <GiftIcon />
-              <GifIcon />
-              <StickerIcon />
-              <EmojiIcon />
-            </div>
-          </form>
         </div>
+        <form onSubmit={sendMessage} className="sticky top-0 mx-3">
+          <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
+          <input
+            className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
+            placeholder="Type message here"
+          />
+          <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
+            <GiftIcon />
+            <GifIcon />
+            <StickerIcon />
+            <EmojiIcon />
+          </div>
+        </form>
       </div>
     </div>
   )
