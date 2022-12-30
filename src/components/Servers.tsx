@@ -5,21 +5,9 @@ import { ReactComponent as CompassLogo } from "../assets/compass.svg"
 import { ReactComponent as DownloadLogo } from "../assets/download.svg"
 import topLogo from "../assets/top.webp"
 import fireshipLogo from "../assets/fireship.webp"
-import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "./App"
 
 export default function Servers() {
   const navigate = useNavigate()
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // ...
-      console.log("Signed in as: " + user.displayName)
-    } else {
-      // User is signed out
-      navigate("/")
-    }
-  })
 
   return (
     <div className="grid min-h-[inherit] grid-cols-[72px_1fr] text-white">

@@ -24,12 +24,13 @@ import {
   limit,
   getCountFromServer,
 } from "firebase/firestore"
-import { auth } from "./App"
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import InfiniteScroll from "react-infinite-scroll-component"
 
 export default function ChannelTOP() {
+  const auth = getAuth()
   const db = getFirestore()
+
   type messages = {
     name: string
     message: string
@@ -38,7 +39,7 @@ export default function ChannelTOP() {
   const [messages, setMessages] = useState<messages[]>(Array(5))
   const [msgCollectionSize, setMsgCollectionSize] = useState(0)
   const [currentChannel, setCurrentChannel] = useState("odin-general")
-  const profileImg = auth.currentUser?.photoURL
+  const [profileImg, setProfileImg] = useState("#")
   const userName = auth.currentUser?.displayName
   const channelDescription =
     currentChannel === "odin-general" ? (
@@ -77,6 +78,16 @@ export default function ChannelTOP() {
   useEffect(() => {
     getCollectionSize()
   }, [messages])
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.photoURL) setProfileImg(user.photoURL)
+      } else {
+        console.log("no user")
+      }
+    })
+  }, [])
 
   async function sendMessage(event: any) {
     try {

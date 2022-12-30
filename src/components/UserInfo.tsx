@@ -1,14 +1,24 @@
 import { ReactComponent as MicrophoneIcon } from "../assets/microphone.svg"
 import { ReactComponent as HeadphoneIcon } from "../assets/headphone.svg"
 import { ReactComponent as GearIcon } from "../assets/gear.svg"
-import { auth } from "./App"
-import { updateProfile, onAuthStateChanged } from "firebase/auth"
+import { getAuth, updateProfile, onAuthStateChanged } from "firebase/auth"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { useEffect, useState } from "react"
 
 export default function UserInfo() {
+  const auth = getAuth()
   const userName = auth.currentUser?.displayName
-  let profileImg = auth.currentUser?.photoURL
+  const [profileImg, setProfileImg] = useState("#")
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.photoURL) setProfileImg(user.photoURL)
+      } else {
+        console.log("no user")
+      }
+    })
+  })
 
   function clickUploadInput() {
     const file = document.querySelector(
@@ -31,8 +41,7 @@ export default function UserInfo() {
           photoURL: url,
         })
           .then(() => {
-            profileImg = url
-            location.reload()
+            setProfileImg(url)
             console.log("Profile photo updated")
           })
           .catch((error) => {

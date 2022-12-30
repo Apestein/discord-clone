@@ -2,7 +2,6 @@ import { ReactComponent as QR } from "../assets/qr-code.svg"
 import { initializeApp } from "firebase/app"
 import { useNavigate } from "react-router-dom"
 import { getAuth, updateProfile, signInAnonymously } from "firebase/auth"
-import { getStorage } from "firebase/storage"
 import ReactLoading from "react-loading"
 
 const firebaseConfig = {
@@ -15,8 +14,6 @@ const firebaseConfig = {
 }
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
-const storage = getStorage(app)
-export { auth, storage }
 
 export default function App() {
   const navigate = useNavigate()
