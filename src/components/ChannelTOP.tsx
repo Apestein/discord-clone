@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { ReactComponent as AtIcon } from "../assets/@.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
 import { ReactComponent as BellIcon } from "../assets/bell.svg"
@@ -25,19 +25,20 @@ import {
   getCountFromServer,
 } from "firebase/firestore"
 import { auth } from "./App"
+import { onAuthStateChanged, getAuth } from "firebase/auth"
 import InfiniteScroll from "react-infinite-scroll-component"
 
 export default function ChannelTOP() {
   const db = getFirestore()
-
   type messages = {
     name: string
     message: string
     timestamp: string
   }
-  const [messages, setMessages] = useState<messages[]>([])
+  const [messages, setMessages] = useState<messages[]>(Array(5))
   const [msgCollectionSize, setMsgCollectionSize] = useState(0)
   const [currentChannel, setCurrentChannel] = useState("odin-general")
+  const profileImg = auth.currentUser?.photoURL
   const userName = auth.currentUser?.displayName
   const channelDescription =
     currentChannel === "odin-general" ? (
@@ -101,11 +102,11 @@ export default function ChannelTOP() {
     setMsgCollectionSize(countSnapshot.data().count)
   }
 
-  function getMessages() {
+  function getMessages(num: number = 0) {
     const msgQuery = query(
       collection(db, "TOP", currentChannel, "messages"),
       orderBy("timestamp", "desc"),
-      limit(messages.length + 5)
+      limit(messages.length + num)
     )
     const unsub = onSnapshot(msgQuery, (snapshot) => {
       const dbMessages: any = []
@@ -167,7 +168,7 @@ export default function ChannelTOP() {
           <InfiniteScroll
             className="flex flex-col-reverse"
             dataLength={messages.length}
-            next={() => setTimeout(getMessages, 1000)}
+            next={() => setTimeout(getMessages, 1000, 5)}
             hasMore={messages.length >= msgCollectionSize ? false : true}
             loader={<h4>Loading...</h4>}
             inverse={true}
@@ -185,7 +186,7 @@ export default function ChannelTOP() {
               >
                 <img
                   className="h-12 w-12 rounded-full bg-black "
-                  src={auth.currentUser?.photoURL || "#"}
+                  src={profileImg}
                   alt="user-img"
                 />
                 <div>

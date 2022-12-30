@@ -2,6 +2,8 @@ import { ReactComponent as QR } from "../assets/qr-code.svg"
 import { initializeApp } from "firebase/app"
 import { useNavigate } from "react-router-dom"
 import { getAuth, updateProfile, signInAnonymously } from "firebase/auth"
+import { getStorage } from "firebase/storage"
+import ReactLoading from "react-loading"
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8fhWnyenGaaCXi4L6CT_qvRuDxMYOfok",
@@ -13,16 +15,18 @@ const firebaseConfig = {
 }
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
-export { auth }
+const storage = getStorage(app)
+export { auth, storage }
 
 export default function App() {
   const navigate = useNavigate()
 
   async function login(event: any) {
     event.preventDefault()
+    const loader = document.querySelector("#loader-wrapper")
+    if (loader) loader.classList.remove("invisible")
     await signInAnonymously(auth)
       .then(() => {
-        // Signed in..
         console.log("sign-in successful")
       })
       .catch((error) => {
@@ -33,20 +37,30 @@ export default function App() {
         console.log(errorMessage)
       })
     const userName = event.target[0].value
-    if (auth.currentUser)
+    if (auth.currentUser?.displayName) {
       await updateProfile(auth.currentUser, {
         displayName: userName,
-        photoURL: "https://avatars.dicebear.com/api/adventurer/:seed.svg",
       })
         .then(() => {
-          // Profile updated!
-          console.log("Profile updated username")
+          console.log("existing user login")
         })
         .catch((error) => {
-          // An error occurred
           console.error("An error occurred", error)
         })
-    navigate("channels")
+      setTimeout(navigate, 1500, "channels")
+    } else if (auth.currentUser) {
+      await updateProfile(auth.currentUser, {
+        displayName: userName,
+        photoURL: `https://avatars.dicebear.com/api/adventurer/${auth.currentUser.uid}.svg`,
+      })
+        .then(() => {
+          console.log("New user login, Profile updated")
+        })
+        .catch((error) => {
+          console.error("An error occurred", error)
+        })
+      setTimeout(navigate, 1500, "channels")
+    }
   }
 
   return (
@@ -103,6 +117,12 @@ export default function App() {
             instantly.
           </p>
         </div>
+      </div>
+      <div
+        id="loader-wrapper"
+        className="invisible fixed flex h-screen w-screen items-center justify-center bg-black bg-opacity-90"
+      >
+        <ReactLoading width="50vw" height="min-content" />
       </div>
     </div>
   )

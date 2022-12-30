@@ -10,6 +10,7 @@ import { auth } from "./App"
 
 export default function Servers() {
   const navigate = useNavigate()
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // ...
