@@ -27,14 +27,14 @@ export default function UserInfo() {
     file?.click()
   }
 
-  function uploadFile(e: any) {
+  async function uploadFile(e: any) {
     const file = e.target.files[0]
     const storage = getStorage()
     const imgRef = ref(storage, auth.currentUser?.uid)
-    uploadBytes(imgRef, file).then((snapshot) => {
-      console.log("Uploaded a blob or file")
+    await uploadBytes(imgRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file:" + imgRef)
     })
-    //update user
+
     getDownloadURL(imgRef).then((url) => {
       if (auth.currentUser)
         updateProfile(auth.currentUser, {

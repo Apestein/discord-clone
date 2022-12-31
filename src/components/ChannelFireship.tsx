@@ -7,12 +7,13 @@ export default function ChannelFireship() {
   return (
     <div className="grid grid-cols-[240px_1fr] bg-bgTertiary ">
       <ChannelSidebar
+        currentChannel={currentChannel}
         setCurrentChannel={setCurrentChannel}
         serverName="Fireship"
         channels={["general"]}
       />
       <div>
-        <img className="h-screen" src={rickRoll} alt="rickroll" />
+        <img className="w-full" src={rickRoll} alt="rickroll" />
       </div>
     </div>
   )

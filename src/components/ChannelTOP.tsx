@@ -12,6 +12,8 @@ import { ReactComponent as GiftIcon } from "../assets/gift.svg"
 import { ReactComponent as GifIcon } from "../assets/gif.svg"
 import { ReactComponent as StickerIcon } from "../assets/sticker.svg"
 import { ReactComponent as EmojiIcon } from "../assets/emoji.svg"
+import { ReactComponent as EditIcon } from "../assets/edit.svg"
+import { ReactComponent as DeleteIcon } from "../assets/delete.svg"
 import ChannelSidebar from "./ChannelSidebar"
 import {
   getFirestore,
@@ -23,6 +25,8 @@ import {
   serverTimestamp,
   limit,
   getCountFromServer,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore"
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import InfiniteScroll from "react-infinite-scroll-component"
@@ -33,14 +37,17 @@ export default function ChannelTOP() {
 
   type messages = {
     name: string
+    uid: string
     message: string
+    msgID: string
+    photo: string
+    ref: any
     timestamp: string
   }
-  const [messages, setMessages] = useState<messages[]>(Array(5))
+  const [messages, setMessages] = useState<messages[]>([])
   const [msgCollectionSize, setMsgCollectionSize] = useState(0)
   const [currentChannel, setCurrentChannel] = useState("odin-general")
-  const [profileImg, setProfileImg] = useState("#")
-  const userName = auth.currentUser?.displayName
+  const [userID, setUserID] = useState("#")
   const channelDescription =
     currentChannel === "odin-general" ? (
       <>
@@ -67,7 +74,7 @@ export default function ChannelTOP() {
     )
 
   useEffect(() => {
-    const unsub = getMessages()
+    const unsub = getMessages(25, 0)
     console.log("subbed")
     return () => {
       unsub()
@@ -82,7 +89,7 @@ export default function ChannelTOP() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        if (user.photoURL) setProfileImg(user.photoURL)
+        setUserID(user.uid)
       } else {
         console.log("no user")
       }
@@ -95,8 +102,10 @@ export default function ChannelTOP() {
       const docRef = await addDoc(
         collection(db, "TOP", currentChannel, "messages"),
         {
-          name: userName,
+          name: auth.currentUser?.displayName,
+          uid: userID,
           message: event.target[0].value,
+          photo: auth.currentUser?.photoURL,
           timestamp: serverTimestamp(),
         }
       )
@@ -113,11 +122,11 @@ export default function ChannelTOP() {
     setMsgCollectionSize(countSnapshot.data().count)
   }
 
-  function getMessages(num: number = 0) {
+  function getMessages(initialNumberOfMessages: number, num: number) {
     const msgQuery = query(
       collection(db, "TOP", currentChannel, "messages"),
       orderBy("timestamp", "desc"),
-      limit(messages.length + num)
+      limit(initialNumberOfMessages + num)
     )
     const unsub = onSnapshot(msgQuery, (snapshot) => {
       const dbMessages: any = []
@@ -125,16 +134,38 @@ export default function ChannelTOP() {
         const dbOneMessage = doc.data()
         const msgObj = {
           name: dbOneMessage.name,
+          uid: dbOneMessage.uid,
           message: dbOneMessage.message,
+          msgID: crypto.randomUUID(),
+          photo: dbOneMessage.photo,
+          ref: doc.ref,
           timestamp: new Date(
             dbOneMessage.timestamp?.seconds * 1000
           ).toTimeString(),
         }
         dbMessages.push(msgObj)
       })
-      setMessages(dbMessages)
+      if (dbMessages.length) setMessages(dbMessages)
     })
     return unsub
+  }
+
+  function handleEdit(msgID: string) {
+    const textareaElement = document.getElementById(msgID)
+    if (!textareaElement?.hasAttribute("readOnly")) {
+      console.log("already editing message")
+      return
+    }
+    if (textareaElement) {
+      textareaElement.classList.toggle("bg-transparent")
+      textareaElement.classList.toggle("bg-bgPrimary")
+      textareaElement.toggleAttribute("readOnly")
+    }
+  }
+
+  function handleDocUpdate(docRef: any, event: any) {
+    event.preventDefault()
+    updateDoc(docRef, { message: event.target[0].value })
   }
 
   return (
@@ -179,7 +210,7 @@ export default function ChannelTOP() {
           <InfiniteScroll
             className="flex flex-col-reverse"
             dataLength={messages.length}
-            next={() => setTimeout(getMessages, 1000, 5)}
+            next={() => setTimeout(getMessages, 1000, 25, 25)}
             hasMore={messages.length >= msgCollectionSize ? false : true}
             loader={<h4>Loading...</h4>}
             inverse={true}
@@ -193,14 +224,14 @@ export default function ChannelTOP() {
             {messages.map((msg) => (
               <div
                 key={crypto.randomUUID()}
-                className="flex h-[25vh] gap-3 py-3 text-txtSecondary"
+                className="flex gap-3 py-3 text-txtSecondary"
               >
                 <img
-                  className="h-12 w-12 rounded-full bg-black "
-                  src={profileImg}
+                  className="h-12 w-12 rounded-full bg-black object-cover "
+                  src={msg.photo}
                   alt="user-img"
                 />
-                <div>
+                <div className="flex-auto">
                   <p>
                     <span className="text-sm font-bold text-white">
                       {msg.name}
@@ -209,7 +240,46 @@ export default function ChannelTOP() {
                       {msg.timestamp}
                     </span>
                   </p>
-                  <p className="break-words">{msg.message} </p>
+                  <form
+                    className="relative flex min-h-fit overflow-hidden"
+                    onSubmit={(e) => handleDocUpdate(msg.ref, e)}
+                  >
+                    <textarea
+                      className="h-8 w-full resize-none rounded-md bg-transparent p-1 focus:outline-none"
+                      readOnly
+                      onInput={(e) => {
+                        e.currentTarget.style.height = "32px"
+                        e.currentTarget.style.height =
+                          e.currentTarget.scrollHeight + "px"
+                      }}
+                      onKeyDown={(e) => {
+                        const previousValue = e.currentTarget.defaultValue
+                        if (e.key === "Escape" || e.key === "Enter") {
+                          e.currentTarget.classList.toggle("bg-transparent")
+                          e.currentTarget.classList.toggle("bg-bgPrimary")
+                          e.currentTarget.toggleAttribute("readOnly")
+                        }
+                        if (e.key === "Enter") {
+                          e.currentTarget.form?.requestSubmit()
+                        } else if (e.key === "Escape")
+                          e.currentTarget.value = previousValue
+                      }}
+                      id={msg.msgID}
+                      defaultValue={msg.message}
+                    />
+                    {userID === msg.uid && (
+                      <i className=" flex pr-3">
+                        <EditIcon
+                          className="cursor-pointer hover:scale-125"
+                          onClick={() => handleEdit(msg.msgID)}
+                        />
+                        <DeleteIcon
+                          className="cursor-pointer hover:scale-125"
+                          onClick={() => deleteDoc(msg.ref)}
+                        />
+                      </i>
+                    )}
+                  </form>
                 </div>
               </div>
             ))}

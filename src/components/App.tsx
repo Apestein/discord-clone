@@ -61,8 +61,8 @@ export default function App() {
   }
 
   return (
-    <div className="relative min-h-[inherit] bg-discord bg-cover bg-[center_top_95px]">
-      <div className="absolute top-1/2 left-1/2 flex w-[784px] translate-x-[-50%] translate-y-[-50%] gap-[32px] rounded-[3px] bg-[#36393f] p-[32px] text-white">
+    <div className="flex min-h-[inherit] items-center justify-center bg-discord bg-cover bg-[center_top_95px]">
+      <div className="flex h-screen w-full max-w-[784px] justify-center gap-5 bg-bgTertiary p-8 text-white sm:h-[408px] sm:w-fit sm:rounded-md">
         <div className="flex flex-col gap-[10px]">
           <h3 className="text-center text-[24px]">Welcome back!</h3>
           <p className="text-center">We're so excited to see you again!</p>
@@ -76,7 +76,7 @@ export default function App() {
                 <input
                   required
                   title="Please fill out this field."
-                  className="h-[40px] min-w-[414px] rounded-[3px] border-none bg-[#202225] p-[10px] text-[14px] text-[#b9bbbe] focus:outline-none"
+                  className="h-[40px] w-full rounded-[3px] border-none bg-[#202225] p-[10px] text-[14px] text-[#b9bbbe] focus:outline-none"
                 />
               </label>
               <label className="g-[5px] flex flex-col items-start text-[12px] text-[#b9bbbe]">
@@ -106,7 +106,7 @@ export default function App() {
             </p>
           </form>
         </div>
-        <div className="flex flex-col items-center justify-center gap-[10px] text-center ">
+        <div className="hidden flex-col items-center justify-center gap-[10px] text-center lg:flex ">
           <QR className="h-fit max-w-[176px] " />
           <h3>Log in with QR code</h3>
           <p className="text-[14px] text-[#b9bbbe]">

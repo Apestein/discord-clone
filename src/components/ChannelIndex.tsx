@@ -34,7 +34,7 @@ export default function ChannelIndex() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-6 ">
+          <div className="flex items-center gap-6 pl-1">
             <MessageIcon />
             <div className="h-6 w-[1px] bg-txtTertiary "></div>
             <InboxIcon />
