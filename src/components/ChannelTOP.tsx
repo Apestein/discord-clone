@@ -152,14 +152,19 @@ export default function ChannelTOP() {
 
   function handleEdit(msgID: string) {
     const textareaElement = document.getElementById(msgID)
+    const pElement = document.getElementById(msgID + "p")
     if (!textareaElement?.hasAttribute("readOnly")) {
       console.log("already editing message")
       return
     }
     if (textareaElement) {
+      textareaElement.classList.toggle("hidden")
       textareaElement.classList.toggle("bg-transparent")
       textareaElement.classList.toggle("bg-bgPrimary")
       textareaElement.toggleAttribute("readOnly")
+    }
+    if (pElement) {
+      pElement.classList.toggle("hidden")
     }
   }
 
@@ -244,8 +249,11 @@ export default function ChannelTOP() {
                     className="relative flex min-h-fit overflow-hidden"
                     onSubmit={(e) => handleDocUpdate(msg.ref, e)}
                   >
+                    <p id={msg.msgID + "p"} className="flex-auto break-all">
+                      {msg.message}
+                    </p>
                     <textarea
-                      className="h-8 w-full resize-none rounded-md bg-transparent p-1 focus:outline-none"
+                      className="hidden h-8 w-full resize-none overflow-hidden rounded-md bg-transparent p-1 focus:outline-none"
                       readOnly
                       onInput={(e) => {
                         e.currentTarget.style.height = "32px"
@@ -255,9 +263,13 @@ export default function ChannelTOP() {
                       onKeyDown={(e) => {
                         const previousValue = e.currentTarget.defaultValue
                         if (e.key === "Escape" || e.key === "Enter") {
+                          e.currentTarget.classList.toggle("hidden")
                           e.currentTarget.classList.toggle("bg-transparent")
                           e.currentTarget.classList.toggle("bg-bgPrimary")
                           e.currentTarget.toggleAttribute("readOnly")
+                          document
+                            .getElementById(msg.msgID + "p")
+                            ?.classList.toggle("hidden")
                         }
                         if (e.key === "Enter") {
                           e.currentTarget.form?.requestSubmit()

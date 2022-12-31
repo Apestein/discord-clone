@@ -61,7 +61,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex min-h-[inherit] items-center justify-center bg-discord bg-cover bg-[center_top_95px]">
+    <div className="flex min-h-screen min-w-fit items-center justify-center bg-discord bg-cover bg-[center_top_95px]">
       <div className="flex h-screen w-full max-w-[784px] justify-center gap-5 bg-bgTertiary p-8 text-white sm:h-[408px] sm:w-fit sm:rounded-md">
         <div className="flex flex-col gap-[10px]">
           <h3 className="text-center text-[24px]">Welcome back!</h3>

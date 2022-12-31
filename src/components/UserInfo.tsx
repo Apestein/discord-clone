@@ -30,7 +30,7 @@ export default function UserInfo() {
   async function uploadFile(e: any) {
     const file = e.target.files[0]
     const storage = getStorage()
-    const imgRef = ref(storage, auth.currentUser?.uid)
+    const imgRef = ref(storage, auth.currentUser?.uid + file.name)
     await uploadBytes(imgRef, file).then((snapshot) => {
       console.log("Uploaded a blob or file:" + imgRef)
     })
