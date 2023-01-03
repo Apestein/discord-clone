@@ -298,7 +298,7 @@ export default function ChannelTOP() {
             ))}
           </InfiniteScroll>
         </div>
-        <form onSubmit={sendMessage} className="sticky top-0 mx-3">
+        <form onSubmit={sendMessage} className="sticky top-0 mx-3 mb-5">
           <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
           <input
             className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
