@@ -33,7 +33,7 @@ export default function App() {
         console.log(errorCode)
         console.log(errorMessage)
       })
-    const userName = event.target[0].value
+    const userName = event.target[0]?.value
     if (auth.currentUser?.displayName) {
       await updateProfile(auth.currentUser, {
         displayName: userName,
@@ -116,6 +116,7 @@ export default function App() {
         </div>
       </div>
       <div
+        data-testid="loader"
         id="loader-wrapper"
         className="invisible fixed flex h-screen w-screen items-center justify-center bg-black bg-opacity-90"
       >

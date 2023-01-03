@@ -99,6 +99,7 @@ export default function ChannelTOP() {
   async function sendMessage(event: any) {
     try {
       event.preventDefault()
+      if (!event.target[0]?.value) return
       const docRef = await addDoc(
         collection(db, "TOP", currentChannel, "messages"),
         {
