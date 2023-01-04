@@ -10,6 +10,16 @@ import "@testing-library/jest-dom"
 import { MemoryRouter, Routes, Route } from "react-router-dom"
 import Servers from "../Servers"
 import ChannelTOP from "../ChannelTOP"
+import { toMatchImageSnapshot } from "jest-image-snapshot"
+
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toMatchImageSnapshot(): R
+    }
+  }
+}
+expect.extend({ toMatchImageSnapshot })
 
 describe("app component", () => {
   it("h3 loads", () => {
@@ -42,16 +52,18 @@ describe("server component", () => {
   it("loads the server component", async () => {
     const { container } = render(
       <MemoryRouter initialEntries={["/TheOdinProject"]}>
-        <ChannelTOP />
+        <Routes>
+          <Route path="/" element={<Servers />}>
+            <Route path="TheOdinProject" element={<ChannelTOP />} />
+          </Route>
+        </Routes>
       </MemoryRouter>
     )
     expect(container).toMatchSnapshot()
-    await userEvent.type(
-      screen.getByPlaceholderText("Type message here"),
-      "hello world!{enter}"
-    )
-    expect(await screen.findByPlaceholderText("Type message here")).toHaveValue(
-      "hello world!"
-    )
+    await userEvent.type(screen.getByRole("textbox"), "hello world!")
+    expect(await screen.findByRole("textbox")).toHaveValue("hello world!")
+    const formElement = container.querySelector("form")
+    formElement?.submit()
+    expect(await screen.findByRole("textbox")).toHaveValue("")
   })
 })
