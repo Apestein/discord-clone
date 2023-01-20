@@ -1,4 +1,4 @@
-# Portfolio
+# Discord Clone
 
 _Features:_
 
@@ -18,4 +18,5 @@ _Technologies Used:_
 - Typescript
 - Tailwind
 
-[discord-demo.webm](https://user-images.githubusercontent.com/107362680/213821903-7d824bfc-aa86-49c7-9e3e-b0e4ae4fb425.webm)
+https://user-images.githubusercontent.com/107362680/213823062-e5d3b04f-3c0d-42e9-9e97-099308f2ba7d.mp4
+
