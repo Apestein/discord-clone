@@ -53,3 +53,7 @@ body {
 .icon-has:has(input:checked) {
   @apply rounded-xl bg-[#3ba55d] text-white;
 }
+
+.overflow-anchor {
+  overflow-anchor: none;
+}

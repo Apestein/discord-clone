@@ -27,6 +27,8 @@ import {
   getCountFromServer,
   deleteDoc,
   updateDoc,
+  where,
+  getDocs,
 } from "firebase/firestore"
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import InfiniteScroll from "react-infinite-scroll-component"
@@ -87,6 +89,7 @@ export default function ChannelTOP() {
   }, [messages])
 
   useEffect(() => {
+    // deleteSpam()
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserID(user.uid)
@@ -174,6 +177,15 @@ export default function ChannelTOP() {
     updateDoc(docRef, { message: event.target[0].value })
   }
 
+  async function deleteSpam() {
+    const q = query(
+      collection(db, "TOP/odin-general/messages"),
+      where("name", "==", "dsdas")
+    )
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => deleteDoc(doc.ref))
+  }
+
   return (
     <div className="grid grid-cols-[240px_1fr] bg-bgTertiary ">
       <ChannelSidebar
@@ -211,13 +223,13 @@ export default function ChannelTOP() {
         </div>
         <div
           id="scrollableDiv"
-          className="ml-3 flex flex-auto flex-col-reverse overflow-auto"
+          className="overflow-anchor ml-3 flex flex-auto flex-col-reverse overflow-auto"
         >
           <InfiniteScroll
             //overflow-anchor: none;
             className="flex flex-col-reverse"
             dataLength={messages.length}
-            next={() => setTimeout(getMessages, 1000, 25, 25)}
+            next={() => setTimeout(getMessages, 1000, messages.length, 25)}
             hasMore={messages.length >= msgCollectionSize ? false : true}
             loader={<h4>Loading...</h4>}
             inverse={true}
