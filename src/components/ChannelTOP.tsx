@@ -145,7 +145,7 @@ export default function ChannelTOP() {
           ref: doc.ref,
           timestamp: new Date(
             dbOneMessage.timestamp?.seconds * 1000
-          ).toDateString(),
+          ).toLocaleString(),
         }
         dbMessages.push(msgObj)
       })
@@ -226,7 +226,6 @@ export default function ChannelTOP() {
           className="overflow-anchor ml-3 flex flex-auto flex-col-reverse overflow-auto"
         >
           <InfiniteScroll
-            //overflow-anchor: none;
             className="flex flex-col-reverse"
             dataLength={messages.length}
             next={() => setTimeout(getMessages, 1000, messages.length, 25)}
