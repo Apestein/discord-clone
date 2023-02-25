@@ -180,7 +180,7 @@ export default function ChannelTOP() {
   async function deleteSpam() {
     const q = query(
       collection(db, "TOP/odin-general/messages"),
-      where("name", "==", "dsdas")
+      where("name", "==", "podep23717@jobsfeel.com")
     )
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc) => deleteDoc(doc.ref))
