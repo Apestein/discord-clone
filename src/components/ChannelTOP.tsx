@@ -155,26 +155,23 @@ export default function ChannelTOP() {
   }
 
   function handleEdit(msgID: string) {
-    const textareaElement = document.getElementById(msgID)
-    const pElement = document.getElementById(msgID + "p")
-    if (!textareaElement?.hasAttribute("readOnly")) {
-      console.log("already editing message")
-      return
-    }
-    if (textareaElement) {
-      textareaElement.classList.toggle("hidden")
-      textareaElement.classList.toggle("bg-transparent")
-      textareaElement.classList.toggle("bg-bgPrimary")
-      textareaElement.toggleAttribute("readOnly")
-    }
-    if (pElement) {
-      pElement.classList.toggle("hidden")
-    }
+    const el = document.getElementById(msgID)
+    el?.toggleAttribute("contentEditable")
+    el?.focus()
+    el?.classList.toggle("bg-bgPrimary")
   }
 
   function handleDocUpdate(docRef: any, event: any) {
     event.preventDefault()
-    updateDoc(docRef, { message: event.target[0].value })
+    updateDoc(docRef, { message: event.target.textContent })
+  }
+
+  function handleSubmitOrCancel(message: messages, e: any) {
+    const previousValue = e.currentTarget.dataset.default
+    if (e.key === "Escape" || e.key === "Enter") handleEdit(message.msgID)
+    if (e.key === "Enter") {
+      handleDocUpdate(message.ref, e)
+    } else if (e.key === "Escape") e.currentTarget.textContent = previousValue!
   }
 
   async function deleteSpam() {
@@ -258,40 +255,15 @@ export default function ChannelTOP() {
                       {msg.timestamp}
                     </span>
                   </p>
-                  <form
-                    className="relative flex min-h-fit overflow-hidden"
-                    onSubmit={(e) => handleDocUpdate(msg.ref, e)}
-                  >
-                    <p id={msg.msgID + "p"} className="flex-auto break-all">
+                  <div className="flex justify-between">
+                    <p
+                      onKeyDown={(e) => handleSubmitOrCancel(msg, e)}
+                      data-default={msg.message}
+                      id={msg.msgID}
+                      className="w-full break-words break-all outline-none"
+                    >
                       {msg.message}
                     </p>
-                    <textarea
-                      className="hidden h-8 w-full resize-none overflow-hidden rounded-md bg-transparent p-1 focus:outline-none"
-                      readOnly
-                      onInput={(e) => {
-                        e.currentTarget.style.height = "32px"
-                        e.currentTarget.style.height =
-                          e.currentTarget.scrollHeight + "px"
-                      }}
-                      onKeyDown={(e) => {
-                        const previousValue = e.currentTarget.defaultValue
-                        if (e.key === "Escape" || e.key === "Enter") {
-                          e.currentTarget.classList.toggle("hidden")
-                          e.currentTarget.classList.toggle("bg-transparent")
-                          e.currentTarget.classList.toggle("bg-bgPrimary")
-                          e.currentTarget.toggleAttribute("readOnly")
-                          document
-                            .getElementById(msg.msgID + "p")
-                            ?.classList.toggle("hidden")
-                        }
-                        if (e.key === "Enter") {
-                          e.currentTarget.form?.requestSubmit()
-                        } else if (e.key === "Escape")
-                          e.currentTarget.value = previousValue
-                      }}
-                      id={msg.msgID}
-                      defaultValue={msg.message}
-                    />
                     {userID === msg.uid && (
                       <i className=" flex pr-3">
                         <EditIcon
@@ -304,7 +276,7 @@ export default function ChannelTOP() {
                         />
                       </i>
                     )}
-                  </form>
+                  </div>
                 </div>
               </div>
             ))}
