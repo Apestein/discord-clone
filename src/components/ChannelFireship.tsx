@@ -1,6 +1,6 @@
 import { useState } from "react"
 import ChannelSidebar from "./ChannelSidebar"
-import rickRoll from "../assets/rickroll.gif"
+import Loader from "./Loader"
 
 export default function ChannelFireship() {
   const [currentChannel, setCurrentChannel] = useState("general")
@@ -12,8 +12,9 @@ export default function ChannelFireship() {
         serverName="Fireship"
         channels={["general"]}
       />
-      <div>
-        <img className="w-full" src={rickRoll} alt="rickroll" />
+      <div className="flex flex-col items-center justify-center gap-5 text-txtPrimary">
+        <h1 className="text-xl">Under Construction</h1>
+        <Loader />
       </div>
     </div>
   )
