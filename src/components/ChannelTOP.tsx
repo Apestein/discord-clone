@@ -174,10 +174,20 @@ export default function ChannelTOP() {
     } else if (e.key === "Escape") e.currentTarget.textContent = previousValue!
   }
 
+  function setInputHeight(e: any) {
+    e.currentTarget.style.height = e.currentTarget.scrollHeight + "px"
+  }
+
+  function handleSubmit(e: any) {
+    if (e.key !== "Enter") return
+    e.preventDefault()
+    e.target.form.requestSubmit()
+  }
+
   async function deleteSpam() {
     const q = query(
       collection(db, "TOP/odin-general/messages"),
-      where("name", "==", "podep23717@jobsfeel.com")
+      where("name", "==", "mishu@gmail.com")
     )
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc) => deleteDoc(doc.ref))
@@ -282,13 +292,17 @@ export default function ChannelTOP() {
             ))}
           </InfiniteScroll>
         </div>
-        <form onSubmit={sendMessage} className="sticky top-0 mx-3 mb-5">
-          <MsgPlusIcon className="absolute top-1/4 left-3 text-txtPrimary" />
-          <input
-            className="h-11 w-full rounded-md bg-txtTertiary pl-10 text-sm text-white focus:outline-none"
+        <form onSubmit={sendMessage} className="relative top-0 mx-3 mb-5">
+          <MsgPlusIcon className="absolute top-[10px] left-3 text-txtPrimary" />
+          <textarea
+            className="h-11 w-full resize-none rounded-md bg-txtTertiary p-3 pr-36 pl-10 text-sm text-white focus:outline-none"
             placeholder="Type message here"
+            onKeyDown={(e) => handleSubmit(e)}
+            onInput={setInputHeight}
+            required
+            maxLength={1000}
           />
-          <div className="absolute top-1/4 right-[2%] flex gap-3 text-txtPrimary">
+          <div className="absolute top-[10px] right-3 flex gap-3 text-txtPrimary">
             <GiftIcon />
             <GifIcon />
             <StickerIcon />
