@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, ReactElement, ReactNode } from "react"
 import { ReactComponent as AtIcon } from "../assets/@.svg"
 import { ReactComponent as ThreadIcon } from "../assets/thread.svg"
 import { ReactComponent as BellIcon } from "../assets/bell.svg"
@@ -182,6 +182,10 @@ export default function ChannelTOP() {
     if (e.key !== "Enter") return
     e.preventDefault()
     e.target.form.requestSubmit()
+    e.target.toggleAttribute("disabled")
+    setTimeout(function () {
+      e.target.toggleAttribute("disabled")
+    }, 5000)
   }
 
   async function deleteSpam() {
@@ -295,7 +299,7 @@ export default function ChannelTOP() {
         <form onSubmit={sendMessage} className="relative top-0 mx-3 mb-5">
           <MsgPlusIcon className="absolute top-[10px] left-3 text-txtPrimary" />
           <textarea
-            className="h-11 w-full resize-none rounded-md bg-txtTertiary p-3 pr-36 pl-10 text-sm text-white focus:outline-none"
+            className="h-11 w-full resize-none rounded-md bg-txtTertiary p-3 pr-36 pl-10 text-sm text-white focus:outline-none disabled:bg-red-600"
             placeholder="Type message here"
             onKeyDown={(e) => handleSubmit(e)}
             onInput={setInputHeight}
