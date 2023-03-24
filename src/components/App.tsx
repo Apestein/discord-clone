@@ -2,7 +2,7 @@ import { ReactComponent as QR } from "../assets/qr-code.svg"
 import { initializeApp } from "firebase/app"
 import { useNavigate } from "react-router-dom"
 import { getAuth, updateProfile, signInAnonymously } from "firebase/auth"
-import ReactLoading from "react-loading"
+import Loader from "./Loader"
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8fhWnyenGaaCXi4L6CT_qvRuDxMYOfok",
@@ -120,7 +120,7 @@ export default function App() {
         id="loader-wrapper"
         className="invisible fixed flex h-screen w-screen items-center justify-center bg-black bg-opacity-90"
       >
-        <ReactLoading width="50vw" height="min-content" />
+        <Loader />
       </div>
     </div>
   )
