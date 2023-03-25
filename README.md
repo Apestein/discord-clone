@@ -2,18 +2,17 @@
 
 _Features:_
 
-- Real Time Update
-- CRUD App
-- Authentication
-- Update User Picture
+- Real Time Crud App
+- User Authentication
+- Update Profile Picture
 - Infinite Scroll
 - Fully Responsive Design
 
 _Technologies Used:_
 
-- Vite & Vitest
-- Firebase (auth, firestore, storage, and hosting)
-- React Testing Library
+- Vite
+- Firebase
+- Jest/RTL/Vitest
 - Typescript
 - Tailwind
 
