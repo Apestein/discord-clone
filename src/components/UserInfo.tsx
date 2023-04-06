@@ -29,6 +29,11 @@ export default function UserInfo() {
 
   async function uploadFile(e: any) {
     const file = e.target.files[0]
+    console.log(file.type)
+    if (!file.type.includes("image")) {
+      alert("not an image")
+      return
+    }
     const storage = getStorage()
     const imgRef = ref(storage, auth.currentUser?.uid + file.name)
     await uploadBytes(imgRef, file).then((snapshot) => {
