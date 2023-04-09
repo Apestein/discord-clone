@@ -62,8 +62,8 @@ export default function App() {
 
   return (
     <div className="flex min-h-screen min-w-fit items-center justify-center bg-discord bg-cover bg-[center_top_95px]">
-      <div className="flex h-screen w-full max-w-[784px] justify-center gap-5 bg-bgTertiary p-8 text-white sm:h-[408px] sm:w-fit sm:rounded-md">
-        <div className="flex flex-col gap-[10px]">
+      <div className="flex h-screen w-full max-w-[784px] justify-center gap-5 bg-bgTertiary p-8 text-white sm:h-[408px] sm:w-fit sm:rounded-md md:min-w-[414px]">
+        <div className="flex w-full flex-col gap-[10px]">
           <h3 className="text-center text-[24px]">Welcome back!</h3>
           <p className="text-center">We're so excited to see you again!</p>
           <form onSubmit={login} id="sign-in-form">
@@ -88,7 +88,7 @@ export default function App() {
                   type="password"
                   title="Please fill out this field."
                   placeholder="Pick a username, no password needed"
-                  className="h-[40px] min-w-[414px] rounded-[3px] border-none bg-[#202225] p-[10px] text-[14px] text-[#b9bbbe] outline outline-1 outline-red-500 "
+                  className="h-[40px] min-w-full rounded-[3px] border-none bg-[#202225] p-[10px] text-[14px] text-[#b9bbbe] outline outline-1 outline-red-500 "
                 />
               </label>
             </div>
