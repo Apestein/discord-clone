@@ -1,4 +1,5 @@
 # Discord Clone
+### A clone project meant to demonstrate CSS skills. The responsive design is exactly the same as web app of discord.
 
 _Features:_
 
