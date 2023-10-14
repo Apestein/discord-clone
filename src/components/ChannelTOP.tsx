@@ -47,6 +47,7 @@ export default function ChannelTOP() {
     timestamp: string
   }
   const [messages, setMessages] = useState<messages[]>([])
+  console.log(messages)
   const [msgCollectionSize, setMsgCollectionSize] = useState(0)
   const [currentChannel, setCurrentChannel] = useState("odin-general")
   const [userID, setUserID] = useState("#")
@@ -257,7 +258,7 @@ export default function ChannelTOP() {
               >
                 <img
                   className="h-12 w-12 rounded-full bg-black object-cover "
-                  src={msg.photo}
+                  src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${msg.uid}`}
                   alt="user-img"
                 />
                 <div className="flex-auto">

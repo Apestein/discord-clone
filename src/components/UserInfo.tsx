@@ -13,7 +13,7 @@ export default function UserInfo() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        if (user.photoURL) setProfileImg(user.photoURL)
+        if (user.photoURL) setProfileImg(`https://api.dicebear.com/7.x/adventurer/svg?seed=${auth.currentUser?.uid}`)
       } else {
         console.log("no user")
       }
